@@ -1,2 +1,4 @@
-package com.codegym.qltcbe.model.dto;public class JwtResponse {
+package com.codegym.qltcbe.model.dto;
+
+public class JwtResponse {
 }
