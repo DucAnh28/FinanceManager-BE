@@ -29,5 +29,5 @@ public class Wallet {
     private String icon;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private User user;
+    private AppUser appUser;
 }
