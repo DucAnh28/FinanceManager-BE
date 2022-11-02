@@ -39,4 +39,9 @@ public class UserService implements IUserService{
         User user = userRepository.findByUsername(username);
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),user.getRoles());
     }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
 }

@@ -8,4 +8,6 @@ import java.util.Optional;
 
 public interface IUserService extends IGeneralService<User> {
     UserDetails findByUsername(String username);
+
+    User getUserByUsername(String username);
 }
