@@ -1,8 +1,8 @@
 package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.dto.JwtResponse;
+import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Role;
-import com.codegym.qltcbe.model.entity.User;
 import com.codegym.qltcbe.service.JwtService;
 import com.codegym.qltcbe.service.role.IRoleService;
 import com.codegym.qltcbe.service.user.IUserService;
@@ -34,14 +34,14 @@ public class LoginController {
     private IRoleService roleService;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody User user) {
+    public ResponseEntity<JwtResponse> login(@RequestBody AppUser user) {
         try {
             // Tạo 1 đối tượng authentication
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Tạo token mới
             String token = jwtService.createToken(authentication);
-            User user1 = userService.getUserByUsername(user.getUsername());
+            AppUser user1 = userService.getUserByUsername(user.getUsername());
             JwtResponse jwtResponse = new JwtResponse(user1.getId(), user1.getUsername(), token, user1.getRoles());
             return new ResponseEntity<>(jwtResponse, HttpStatus.ACCEPTED);
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
+    public ResponseEntity<AppUser> register(@RequestBody AppUser user) {
         if (userService.getUserByUsername(user.getUsername()) == null){
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.findById(2L).get());
