@@ -19,16 +19,16 @@ public class Payment {
     private String name;
     @Column(nullable = false)
     private Long money;
-    @Column(nullable = false)
+    @Column(columnDefinition = "date")
     private LocalDate date;
-    @Column()
+    @Column(columnDefinition = "longtext")
     private String description;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     private Wallet wallet;
 
     @Column(columnDefinition = "int default 1")
