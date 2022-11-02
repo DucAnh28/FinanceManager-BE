@@ -1,5 +1,6 @@
-package com.codegym.qltcbe.config.filter;
+package com.codegym.qltcbe.config;
 
+import com.codegym.qltcbe.config.filter.JwtAuthenticationFilter;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
