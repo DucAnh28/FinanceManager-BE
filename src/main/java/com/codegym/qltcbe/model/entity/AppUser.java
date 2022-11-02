@@ -12,7 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
