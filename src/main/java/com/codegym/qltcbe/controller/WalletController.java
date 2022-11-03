@@ -42,4 +42,14 @@ public class WalletController {
         }
         return new ResponseEntity<>(walletOptional.get(), HttpStatus.OK);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Wallet> deleteWallet(@PathVariable Long id) {
+        Optional<Wallet> walletDelete = walletService.findById(id);
+        if (!walletDelete.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        walletService.remove(id);
+        return new ResponseEntity<>(walletDelete.get(), HttpStatus.NO_CONTENT);
+    }
+
 }
