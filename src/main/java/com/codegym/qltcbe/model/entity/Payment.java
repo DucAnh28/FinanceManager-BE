@@ -29,6 +29,7 @@ public class Payment {
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "wallet_id")
     private Wallet wallet;
 
     @Column(columnDefinition = "int default 1")

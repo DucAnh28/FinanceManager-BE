@@ -9,4 +9,6 @@ public interface IGeneralService<T> {
 
     T save(T t);
 
-    void remove(Long id);}
+
+    void remove(Long id);
+}

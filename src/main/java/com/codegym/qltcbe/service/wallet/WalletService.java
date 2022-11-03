@@ -1,7 +1,7 @@
 package com.codegym.qltcbe.service.wallet;
 
 import com.codegym.qltcbe.model.entity.Wallet;
-import com.codegym.qltcbe.repository.WalletRepo;
+import com.codegym.qltcbe.repo.wallet.WalletRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
