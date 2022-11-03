@@ -51,5 +51,13 @@ public class WalletController {
         walletService.remove(id);
         return new ResponseEntity<>(walletDelete.get(), HttpStatus.NO_CONTENT);
     }
-
+    @PutMapping("/{id}")
+    public ResponseEntity<Wallet> editWallet(@PathVariable Long id,@RequestBody Wallet wallet){
+        Optional<Wallet> walletOptional=walletService.findById(id);
+        if (!walletOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+         wallet.setId(walletOptional.get().getId());
+         return new ResponseEntity<>(walletService.save(wallet),HttpStatus.OK);
+    }
 }
