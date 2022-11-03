@@ -1,4 +1,4 @@
-package com.codegym.qltcbe.service;
+package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
 
@@ -14,9 +14,9 @@ public interface IPaymentService {
 
 
 
-    Iterable<Payment> findAllByCategory_id(Long id);
+    Iterable<Payment> findAllByCategory_Id(Long id);
 
-    Iterable<Payment> findAllByWallet_id(Long id);
+    Iterable<Payment> findAllByWallet_Id(Long id);
 
     Iterable<Payment> findAllByWallet(Long id);
 

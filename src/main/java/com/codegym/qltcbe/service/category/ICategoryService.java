@@ -1,4 +1,4 @@
-package com.codegym.qltcbe.service;
+package com.codegym.qltcbe.service.category;
 
 import com.codegym.qltcbe.model.entity.Category;
 

@@ -1,13 +1,14 @@
-package com.codegym.qltcbe.service;
+package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
 import com.codegym.qltcbe.repo.IPaymentRepository;
+import com.codegym.qltcbe.service.payment.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
-public class PaymentService implements IPaymentService{
+public class PaymentService implements IPaymentService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
