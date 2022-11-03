@@ -13,7 +13,6 @@ public interface IPaymentService {
     Optional<Payment> findById(Long id);
 
 
-
     Iterable<Payment> findAllByCategory_id(Long id);
 
     Iterable<Payment> findAllByWallet_id(Long id);
