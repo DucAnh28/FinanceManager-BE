@@ -1,6 +1,7 @@
 package com.codegym.qltcbe.service;
 
 import com.codegym.qltcbe.model.entity.Payment;
+import com.codegym.qltcbe.repo.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
