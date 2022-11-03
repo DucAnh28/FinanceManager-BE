@@ -1,6 +1,7 @@
 package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.dto.JwtResponse;
+import com.codegym.qltcbe.model.dto.LoginForm;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Role;
 import com.codegym.qltcbe.service.JwtService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -34,7 +36,7 @@ public class LoginController {
     private IRoleService roleService;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@RequestBody AppUser user) {
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginForm user) {
         try {
             // Tạo 1 đối tượng authentication
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
@@ -51,7 +53,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AppUser> register(@RequestBody AppUser user) {
+    public ResponseEntity<AppUser> register(@Valid @RequestBody AppUser user) {
         if (userService.getUserByUsername(user.getUsername()) == null){
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.findById(2L).get());
