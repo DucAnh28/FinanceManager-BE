@@ -18,11 +18,11 @@ public class PaymentController {
     @Autowired
     private IPaymentService paymentService;
 
-    @Autowired
-    private ICategoryService categoryService;
-
-    @Autowired
-    private IWalletService walletService;
+//    @Autowired
+//    private ICategoryService categoryService;
+//
+//    @Autowired
+//    private IWalletService walletService;
 
     @GetMapping("find-by-wallet/{id}")
     public ResponseEntity<Iterable<Payment>> findAll(@PathVariable Long id) {
