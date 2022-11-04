@@ -42,5 +42,10 @@ public class PaymentService implements IPaymentService {
          paymentRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id) {
+        return null;
+    }
+
 
 }

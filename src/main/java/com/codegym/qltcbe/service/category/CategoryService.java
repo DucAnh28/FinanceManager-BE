@@ -31,14 +31,14 @@ public class CategoryService implements ICategoryService {
 
     }
 
-    @Override
-    public Iterable<Category> findAllByStatus(int num, Long id) {
-        return categoryRepository.findAllByStatus(num, id);
-    }
+//    @Override
+//    public Iterable<Category> findAllByStatus(int num, Long id) {
+//        return categoryRepository.findAllByStatus(num, id);
+//    }
 
-    @Override
-    public Iterable<Category> findAllByUserId(Long id) {
-        return categoryRepository.findAllByUserId(id);
-    }
+//    @Override
+//    public Iterable<Category> findAllByUserId(Long id) {
+//        return categoryRepository.findAllByUserId(id);
+//    }
 }
 
