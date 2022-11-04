@@ -57,7 +57,9 @@ public class CategoryController {
         if (!optionalCategory.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        categoryService.delete(id);
+        optionalCategory.get().setStatus(0);
+        categoryService.save(optionalCategory.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
+
