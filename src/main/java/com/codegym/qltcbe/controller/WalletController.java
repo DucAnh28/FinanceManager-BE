@@ -27,6 +27,7 @@ public class WalletController {
 
     @PostMapping("/create")
     public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet){
+        wallet.setStatus(1);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.CREATED);
     }
     @GetMapping()
