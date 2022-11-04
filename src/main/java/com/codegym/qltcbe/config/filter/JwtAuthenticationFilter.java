@@ -25,24 +25,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = getTokenFromRequest(request);
-        if (token != null){
-            // Lấy username từ token:
-            String username = jwtService.getUsernameFromJwtToken(token);
-            // Lấy userDetail thông qua username:
-            UserDetails userDetails = userService.findByUsername(username);
-            // Thực hiện việc xác thực thông qua token
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        try {
+            String token = getTokenFromRequest(request);
+            if (token != null) {
+                // Lấy username từ token:
+                String username = jwtService.getUsernameFromJwtToken(token);
+                // Lấy userDetail thông qua username:
+                UserDetails userDetails = userService.loadUserByUsername(username);
+                // Thực hiện việc xác thực thông qua token
+                UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+            }
+        } catch (Exception e) {
+            logger.error("Can NOT set Can NOT set user authentication -> Message: {}", e);
         }
+        filterChain.doFilter(request, response);
     }
 
     private String getTokenFromRequest(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            return authHeader.replace("Bearer ","");
-        }
-        else return null;
+            return authHeader.replace("Bearer ", "");
+        } else return null;
     }
 }

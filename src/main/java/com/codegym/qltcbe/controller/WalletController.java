@@ -30,8 +30,34 @@ public class WalletController {
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.CREATED);
     }
     @GetMapping()
-    private ResponseEntity<Iterable<Wallet>> getAllWallet(){
+    public ResponseEntity<Iterable<Wallet>> getAllWallet(){
         Iterable<Wallet> wallets =  walletService.findAll();
         return new ResponseEntity<>(wallets, HttpStatus.OK);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Wallet> findWalletById(@PathVariable Long id) {
+        Optional<Wallet> walletOptional = walletService.findById(id);
+        if (!walletOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(walletOptional.get(), HttpStatus.OK);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Wallet> deleteWallet(@PathVariable Long id) {
+        Optional<Wallet> walletDelete = walletService.findById(id);
+        if (!walletDelete.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        walletService.remove(id);
+        return new ResponseEntity<>(walletDelete.get(), HttpStatus.NO_CONTENT);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Wallet> editWallet(@PathVariable Long id,@RequestBody Wallet wallet){
+        Optional<Wallet> walletOptional=walletService.findById(id);
+        if (!walletOptional.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+         wallet.setId(walletOptional.get().getId());
+         return new ResponseEntity<>(walletService.save(wallet),HttpStatus.OK);
     }
 }

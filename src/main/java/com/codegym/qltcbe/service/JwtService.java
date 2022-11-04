@@ -1,11 +1,11 @@
 package com.codegym.qltcbe.service;
 
-import com.codegym.qltcbe.model.entity.User;
 import com.codegym.qltcbe.service.user.IUserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;

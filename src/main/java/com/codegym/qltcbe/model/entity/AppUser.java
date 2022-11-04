@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @Entity
@@ -18,12 +20,14 @@ public class AppUser {
     private Long id;
 
     @Column(columnDefinition = "varchar(255)",unique = true,nullable = false)
+    @Email
     private String email;
 
     @Column(columnDefinition = "varchar(255)",unique = true,nullable = false)
     private String username;
 
     @Column(nullable = false)
+    @Pattern(regexp = "^([A-Z]{1})([a-z]{4,})([0-9]{1,})")
     private String password;
 
     @Column()
