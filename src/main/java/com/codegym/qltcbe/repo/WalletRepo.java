@@ -1,4 +1,4 @@
-package com.codegym.qltcbe.repo.wallet;
+package com.codegym.qltcbe.repo;
 
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;

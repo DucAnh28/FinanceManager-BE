@@ -1,7 +1,7 @@
 package com.codegym.qltcbe.service.role;
 
 import com.codegym.qltcbe.model.entity.Role;
-import com.codegym.qltcbe.repo.role.IRoleRepository;
+import com.codegym.qltcbe.repo.IRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

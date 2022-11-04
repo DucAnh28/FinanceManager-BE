@@ -2,7 +2,6 @@ package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;
-import com.codegym.qltcbe.repo.user.IUserRepository;
 import com.codegym.qltcbe.service.user.IUserService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import com.codegym.qltcbe.service.wallet.WalletService;
@@ -31,7 +30,8 @@ public class WalletController {
     private IUserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet) {
+    public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet){
+        wallet.setStatus(1);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.CREATED);
     }
 

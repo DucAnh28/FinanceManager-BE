@@ -1,4 +1,4 @@
-package com.codegym.qltcbe.repo.role;
+package com.codegym.qltcbe.repo;
 
 import com.codegym.qltcbe.model.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
