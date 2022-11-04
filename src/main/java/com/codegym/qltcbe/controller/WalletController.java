@@ -48,7 +48,8 @@ public class WalletController {
         if (!walletDelete.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        walletService.remove(id);
+        walletDelete.get().setStatus(0);
+        walletService.save(walletDelete.get());
         return new ResponseEntity<>(walletDelete.get(), HttpStatus.NO_CONTENT);
     }
     @PutMapping("/{id}")
