@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.YearMonth;
 import java.util.Optional;
 
 @Controller
@@ -92,6 +93,12 @@ public class PaymentController {
         walletService.save(editWallet.get());
         paymentService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("find-all-by-time")
+    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
+        String month = String.valueOf(YearMonth.now());
+        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
     }
 
 //    @PutMapping("/update/{id}")
