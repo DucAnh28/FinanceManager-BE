@@ -9,25 +9,37 @@ import java.util.Optional;
 @Service
 public class WalletService  implements IWalletService{
     @Autowired
-    private WalletRepo walletRepo;
+    private WalletRepo walletRepository;
+
+    @Override
+    public Wallet save(Wallet wallet) {
+        return walletRepository.save(wallet);
+    }
 
     @Override
     public Iterable<Wallet> findAll() {
-        return walletRepo.findAll();
+        return walletRepository.findAll();
     }
 
     @Override
     public Optional<Wallet> findById(Long id) {
-        return walletRepo.findById(id);
+        return walletRepository.findById(id);
     }
 
     @Override
-    public Wallet save(Wallet wallet) {
-        return walletRepo.save(wallet);
+    public Iterable<Wallet> findAllByStatus(Long id) {
+        return walletRepository.findAllByStatus(id);
     }
 
     @Override
-    public void remove(Long id) {
-        walletRepo.deleteById(id);
+    public Iterable<Wallet> findAllByStatusPublicAndUser_Id(Long id) {
+        return null;
     }
+
+    @Override
+    public Iterable<Wallet> findAllByStatusPrivateAndUser_Id(Long id) {
+        return null;
+    }
+
+
 }

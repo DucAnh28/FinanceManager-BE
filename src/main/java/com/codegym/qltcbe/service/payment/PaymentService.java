@@ -14,56 +14,24 @@ public class PaymentService implements IPaymentService {
     private IPaymentRepository paymentRepository;
     @Override
     public Payment save(Payment payment) {
-        return null;
+        return paymentRepository.save(payment);
     }
 
     @Override
     public Iterable<Payment> findAll() {
-        return null;
+        return paymentRepository.findAll();
     }
 
     @Override
     public Optional<Payment> findById(Long id) {
-        return Optional.empty();
+        return paymentRepository.findById(id);
     }
 
-    @Override
-    public Iterable<Payment> findAllByCategory_id(Long id) {
-        return null;
-    }
-
-    @Override
-    public Iterable<Payment> findAllByWallet_id(Long id) {
-        return null;
-    }
-
-    @Override
-    public Iterable<Payment> findAllByWallet(Long id) {
-        return null;
-    }
 
     @Override
     public void remove(Long id) {
-
+         paymentRepository.deleteById(id);
     }
 
-    @Override
-    public Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id) {
-        return null;
-    }
 
-    @Override
-    public Iterable<Payment> findAllPaymentIncomeFor6Months(Long id, String presentTime, String sixMonthsAgo) {
-        return null;
-    }
-
-    @Override
-    public Iterable<Payment> findAllPaymentExpenseFor6Months(Long id, String presentTime, String sixMonthsAgo) {
-        return null;
-    }
-
-    @Override
-    public Iterable<Payment> findAllByPayment(String startTime, String endTime, Long status, Long from, Long to, Long id) {
-        return null;
-    }
 }
