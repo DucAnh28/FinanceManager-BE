@@ -58,6 +58,7 @@ public class LoginController {
             Set<Role> roles = new HashSet<>();
             roles.add(roleService.findById(2L).get());
             user.setRoles(roles);
+            user.setAva("https://toigingiuvedep.vn/wp-content/uploads/2021/05/avatar-trang-hai.jpg");
             return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
         }
         else {

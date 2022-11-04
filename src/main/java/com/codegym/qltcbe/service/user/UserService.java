@@ -1,7 +1,7 @@
 package com.codegym.qltcbe.service.user;
 
 import com.codegym.qltcbe.model.entity.AppUser;
-import com.codegym.qltcbe.repo.user.IUserRepository;
+import com.codegym.qltcbe.repo.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
