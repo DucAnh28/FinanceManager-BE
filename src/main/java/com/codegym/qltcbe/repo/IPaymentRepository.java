@@ -1,4 +1,4 @@
-package com.codegym.qltcbe.repo.payment;
+package com.codegym.qltcbe.repo;
 
 import com.codegym.qltcbe.model.entity.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;

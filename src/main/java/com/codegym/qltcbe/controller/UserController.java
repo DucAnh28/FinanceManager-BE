@@ -1,6 +1,5 @@
 package com.codegym.qltcbe.controller;
 
-import com.codegym.qltcbe.model.dto.UserDTO;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +31,13 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<AppUser> editUserById(@PathVariable Long id, @Valid @RequestBody AppUser appUser) {
         Optional<AppUser> userOptional = userService.findById(id);
-        if (!userOptional.isPresent()){
+        if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            appUser.setId(userOptional.get().getId());
-            return new ResponseEntity<>(userService.save(appUser),HttpStatus.OK);
+            if (appUser.getAva() == null) {
+                appUser.setAva(userOptional.get().getAva());
+            }
+            return new ResponseEntity<>(userService.save(appUser), HttpStatus.OK);
         }
     }
 }
