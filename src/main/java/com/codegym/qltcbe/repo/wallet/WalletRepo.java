@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WalletRepo extends JpaRepository<Wallet, Long> {
-
-     Iterable<Wallet> findWalletsByAppUserId (Long user_id);
+    Iterable<Wallet> findWalletsByAppUserId(Long user_id);
 
 }
