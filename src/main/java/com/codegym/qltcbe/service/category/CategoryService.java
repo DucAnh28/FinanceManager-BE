@@ -3,9 +3,10 @@ package com.codegym.qltcbe.service.category;
 import com.codegym.qltcbe.model.entity.Category;
 import com.codegym.qltcbe.repo.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class CategoryService implements ICategoryService {
     @Autowired
     private ICategoryRepository categoryRepository;

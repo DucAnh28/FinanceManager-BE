@@ -1,6 +1,8 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.entity.Category;
 import com.codegym.qltcbe.model.entity.Payment;
+import com.codegym.qltcbe.model.entity.Wallet;
 import com.codegym.qltcbe.service.category.ICategoryService;
 import com.codegym.qltcbe.service.payment.IPaymentService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
@@ -49,49 +51,49 @@ public class PaymentController {
     private ResponseEntity<Payment> save(@RequestBody Payment payment) {
         return new ResponseEntity<>(paymentService.save(payment), HttpStatus.OK);
     }
-}
 
-//    @PutMapping("{id}")
-//    private ResponseEntity<Transaction> update(@PathVariable Long id, @RequestBody Transaction transaction) {
-//        Optional<Transaction> optionalTransaction = transactionService.findById(id);
-//        if (!optionalTransaction.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        transaction.setId(id);
-//        return new ResponseEntity<>(transactionService.save(transaction), HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/create")
-//    public ResponseEntity<Optional<Transaction>> createTransaction(@RequestBody Transaction transaction) {
-//        Optional<Wallet> wallet = walletService.findById(transaction.getWallet().getId());
-//        Optional<Category> category = categoryService.findById(transaction.getCategory().getId());
-//        transaction.getCategory().setStatus(category.get().getStatus());
-//        transactionService.save(transaction);
-//        if (transaction.getCategory().getStatus() == 1) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() + transaction.getTotalSpent());
-//            walletService.save(wallet.get());
-//        } else {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() - transaction.getTotalSpent());
-//            walletService.save(wallet.get());
-//        }
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Transaction> removeTransaction(@PathVariable Long id) {
-//        Optional<Transaction> transaction = transactionService.findById(id);
-//        Optional<Wallet> editWallet = walletService.findById(transaction.get().getWallet().getId());
-//        editWallet.get().setId(transaction.get().getWallet().getId());
-//        if (transaction.get().getCategory().getStatus() == 1) {
-//            editWallet.get().setMoneyAmount(editWallet.get().getMoneyAmount() - transaction.get().getTotalSpent());
-//        } else {
-//            editWallet.get().setMoneyAmount(editWallet.get().getMoneyAmount() + transaction.get().getTotalSpent());
-//        }
-//        walletService.save(editWallet.get());
-//        transactionService.remove(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
+
+    @PutMapping("{id}")
+    private ResponseEntity<Payment> update(@PathVariable Long id, @RequestBody  Payment payment) {
+        Optional<Payment> optionalPayment = paymentService.findById(id);
+        if (!optionalPayment.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        payment.setId(id);
+        return new ResponseEntity<>(paymentService.save(payment), HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Optional<Payment>> createPayment(@RequestBody Payment payment) {
+        Optional<Wallet> wallet = walletService.findById(payment.getWallet().getId());
+        Optional<Category> category = categoryService.findById(payment.getCategory().getId());
+        payment.getCategory().setStatus(category.get().getStatus());
+        paymentService.save(payment);
+        if (payment.getCategory().getStatus() == 1) {
+            wallet.get().setMoney(wallet.get().getMoney() + payment.getMoney());
+            walletService.save(wallet.get());
+        } else {
+            wallet.get().setMoney(wallet.get().getMoney() - payment.getMoney());
+            walletService.save(wallet.get());
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Payment> removeTransaction(@PathVariable Long id) {
+        Optional<Payment> payment = paymentService.findById(id);
+        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
+        editWallet.get().setId(payment.get().getWallet().getId());
+        if (payment.get().getCategory().getStatus() == 1) {
+            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
+        } else {
+            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
+        }
+        walletService.save(editWallet.get());
+        paymentService.remove(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 //    @PutMapping("/update/{id}")
 //    public ResponseEntity<Optional<Transaction>> updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
 //        Optional<Transaction> editTransaction = transactionService.findById(id);
@@ -114,4 +116,4 @@ public class PaymentController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 //
-//}
+}

@@ -14,9 +14,9 @@ public interface IPaymentService {
 
 
 
-//    Iterable<Payment> findAllByCategory_Id(Long id);
+    Iterable<Payment> findAllByCategory_Id(Long id);
 
-//    Iterable<Payment> findAllByWallet_Id(Long id);
+    Iterable<Payment> findAllByWallet_Id(Long id);
 //
 //    Iterable<Payment> findAllByWallet(Long id);
 

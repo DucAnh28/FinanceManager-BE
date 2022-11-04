@@ -1,8 +1,7 @@
 package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
-import com.codegym.qltcbe.repo.IPaymentRepository;
-import com.codegym.qltcbe.service.payment.IPaymentService;
+import com.codegym.qltcbe.repo.payment.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +24,16 @@ public class PaymentService implements IPaymentService {
     @Override
     public Optional<Payment> findById(Long id) {
         return paymentRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Payment> findAllByCategory_Id(Long id) {
+        return paymentRepository.findAllByCategory_Id(id);
+    }
+
+    @Override
+    public Iterable<Payment> findAllByWallet_Id(Long wallet_id) {
+        return paymentRepository.findAllByWallet_Id(wallet_id);
     }
 
 
