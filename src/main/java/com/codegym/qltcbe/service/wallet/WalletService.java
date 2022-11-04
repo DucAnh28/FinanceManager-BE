@@ -1,7 +1,8 @@
 package com.codegym.qltcbe.service.wallet;
 
+import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;
-import com.codegym.qltcbe.repository.WalletRepo;
+import com.codegym.qltcbe.repo.WalletRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,5 +30,10 @@ public class WalletService  implements IWalletService{
     @Override
     public void remove(Long id) {
         walletRepo.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Wallet> findWalletsByAppUserId(Long user_id) {
+        return walletRepo.findWalletsByAppUserId(user_id);
     }
 }

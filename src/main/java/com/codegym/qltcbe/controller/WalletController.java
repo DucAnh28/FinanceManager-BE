@@ -1,6 +1,8 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;
+import com.codegym.qltcbe.service.user.IUserService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import com.codegym.qltcbe.service.wallet.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +26,15 @@ import java.util.Optional;
 public class WalletController {
     @Autowired
     private IWalletService walletService;
+    @Autowired
+    private IUserService userService;
 
     @PostMapping("/create")
     public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet){
+        wallet.setStatus(1);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.CREATED);
     }
-    @GetMapping()
-    public ResponseEntity<Iterable<Wallet>> getAllWallet(){
-        Iterable<Wallet> wallets =  walletService.findAll();
-        return new ResponseEntity<>(wallets, HttpStatus.OK);
-    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Wallet> findWalletById(@PathVariable Long id) {
         Optional<Wallet> walletOptional = walletService.findById(id);
@@ -42,6 +43,7 @@ public class WalletController {
         }
         return new ResponseEntity<>(walletOptional.get(), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Wallet> deleteWallet(@PathVariable Long id) {
         Optional<Wallet> walletDelete = walletService.findById(id);
@@ -52,13 +54,20 @@ public class WalletController {
         walletService.save(walletDelete.get());
         return new ResponseEntity<>(walletDelete.get(), HttpStatus.NO_CONTENT);
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Wallet> editWallet(@PathVariable Long id,@RequestBody Wallet wallet){
-        Optional<Wallet> walletOptional=walletService.findById(id);
-        if (!walletOptional.isPresent()){
+    public ResponseEntity<Wallet> editWallet(@PathVariable Long id, @RequestBody Wallet wallet) {
+        Optional<Wallet> walletOptional = walletService.findById(id);
+        if (!walletOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-         wallet.setId(walletOptional.get().getId());
-         return new ResponseEntity<>(walletService.save(wallet),HttpStatus.OK);
+        wallet.setId(walletOptional.get().getId());
+        return new ResponseEntity<>(walletService.save(wallet), HttpStatus.OK);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Iterable<Wallet>> getAllWallet(@RequestParam Long user_id) {
+        Iterable<Wallet> walletIterable = walletService.findWalletsByAppUserId(user_id);
+        return new ResponseEntity<>(walletIterable, HttpStatus.OK);
     }
 }
