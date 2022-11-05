@@ -1,5 +1,6 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.dto.ChangePasswordDTO;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,19 @@ public class UserController {
                 appUser.setAva(userOptional.get().getAva());
             }
             return new ResponseEntity<>(userService.save(appUser), HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<AppUser> changePassword(@PathVariable Long id, @Valid @RequestBody ChangePasswordDTO changePasswordDTO) {
+        Optional<AppUser> userOptional = userService.findById(id);
+        if (!userOptional.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else if (userOptional.get().getPassword().equals(changePasswordDTO.getOldPassword())) {
+            userOptional.get().setPassword(changePasswordDTO.getNewPassword());
+            return new ResponseEntity<>(userService.save(userOptional.get()), HttpStatus.ACCEPTED);
+        } else {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
 }
