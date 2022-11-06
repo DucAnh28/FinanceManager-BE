@@ -27,8 +27,8 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllByCategory_Id(Long id) {
-        return paymentRepository.findAllByCategory_Id(id);
+    public Iterable<Payment> findAllByCategory_Id(Long category_id) {
+        return paymentRepository.findAllByCategory_Id(category_id);
     }
 
     @Override
