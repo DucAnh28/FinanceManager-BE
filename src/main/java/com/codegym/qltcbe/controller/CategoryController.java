@@ -17,10 +17,6 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
-//    @GetMapping("find-by-user/{id}")
-//    public ResponseEntity<Iterable<Category>> findAll(@PathVariable Long id) {
-//        return new ResponseEntity<>(categoryService.findAllByUserId(id), HttpStatus.OK);
-//    }
 
     @GetMapping("{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id) {
@@ -31,10 +27,7 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.findById(id).get(), HttpStatus.OK);
     }
 
-//    @GetMapping("find-by-status/{num}/{id}")
-//    public ResponseEntity<Iterable<Category>> findAllByStatus(@PathVariable int num, @PathVariable Long id) {
-//        return new ResponseEntity<>(categoryService.findAllByStatus(num,id), HttpStatus.OK);
-//    }
+
 
     @PostMapping
     private ResponseEntity<Category> save(@RequestBody Category category) {

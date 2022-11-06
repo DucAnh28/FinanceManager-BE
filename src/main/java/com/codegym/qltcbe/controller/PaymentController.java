@@ -41,11 +41,16 @@ public class PaymentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Payment> findById(@PathVariable Long id) {
-        Optional<Payment> optionalTransaction = paymentService.findById(id);
-        if (!optionalTransaction.isPresent()) {
+        Optional<Payment> optionalPayment = paymentService.findById(id);
+        if (!optionalPayment.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(paymentService.findById(id).get(), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Iterable<Payment>> findAll() {
+        return new ResponseEntity<>(paymentService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -55,7 +60,7 @@ public class PaymentController {
 
 
     @PutMapping("{id}")
-    private ResponseEntity<Payment> update(@PathVariable Long id, @RequestBody  Payment payment) {
+    private ResponseEntity<Payment> update(@PathVariable Long id, @RequestBody Payment payment) {
         Optional<Payment> optionalPayment = paymentService.findById(id);
         if (!optionalPayment.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -81,7 +86,7 @@ public class PaymentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Payment> removeTransaction(@PathVariable Long id) {
+    public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
         Optional<Payment> payment = paymentService.findById(id);
         Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
         editWallet.get().setId(payment.get().getWallet().getId());
@@ -101,26 +106,26 @@ public class PaymentController {
         return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<Optional<Transaction>> updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
-//        Optional<Transaction> editTransaction = transactionService.findById(id);
-//        Optional<Wallet> wallet = walletService.findById(editTransaction.get().getWallet().getId());
-//        transaction.setId(id);
-//        int oldTransaction = editTransaction.get().getCategory().getStatus();
-//        int newTransaction = transaction.getCategory().getStatus();
-//        wallet.get().setId(wallet.get().getId());
-//        if ((oldTransaction == 1) && (newTransaction == 1)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() - editTransaction.get().getTotalSpent() + transaction.getTotalSpent());
-//        } else if ((oldTransaction == 1) && (newTransaction == 2)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() - editTransaction.get().getTotalSpent() - transaction.getTotalSpent());
-//        } else if ((oldTransaction == 2) && (newTransaction == 1)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() + editTransaction.get().getTotalSpent() + transaction.getTotalSpent());
-//        } else {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() + editTransaction.get().getTotalSpent() - transaction.getTotalSpent());
-//        }
-//        transactionService.save(transaction);
-//        walletService.save(wallet.get());
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-//
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Optional<Payment>> updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
+        Optional<Payment> editPayment = paymentService.findById(id);
+        Optional<Wallet> wallet = walletService.findById(editPayment.get().getWallet().getId());
+        payment.setId(id);
+        int oldPayment = editPayment.get().getCategory().getStatus();
+        int newPayment = payment.getCategory().getStatus();
+        wallet.get().setId(wallet.get().getId());
+        if ((oldPayment == 1) && (newPayment == 1)) {
+            wallet.get().setMoney(wallet.get().getMoney() - editPayment.get().getMoney() + payment.getMoney());
+        } else if ((oldPayment == 1) && (newPayment == 2)) {
+            wallet.get().setMoney(wallet.get().getMoney() - editPayment.get().getMoney() - payment.getMoney());
+        } else if ((oldPayment == 2) && (newPayment == 1)) {
+            wallet.get().setMoney(wallet.get().getMoney() + editPayment.get().getMoney() + payment.getMoney());
+        } else {
+            wallet.get().setMoney(wallet.get().getMoney() + editPayment.get().getMoney() - payment.getMoney());
+        }
+        paymentService.save(payment);
+        walletService.save(wallet.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
