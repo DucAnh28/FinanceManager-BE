@@ -45,4 +45,6 @@ public class UserService implements IUserService {
     public AppUser getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
 }
