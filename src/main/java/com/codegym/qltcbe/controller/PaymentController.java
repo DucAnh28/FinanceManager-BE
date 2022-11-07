@@ -100,11 +100,11 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("find-all-by-time")
-    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
-        String month = String.valueOf(YearMonth.now());
-        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
-    }
+//    @GetMapping("find-all-by-time")
+//    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
+//        String month = String.valueOf(YearMonth.now());
+//        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
+//    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Optional<Payment>> updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
@@ -127,5 +127,12 @@ public class PaymentController {
         walletService.save(wallet.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+//    @GetMapping("find-all-by-time2")
+//    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("id") int id) {
+//        String month = String.valueOf(YearMonth.now());
+//        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(2, month, id), HttpStatus.OK);
+//    }
+
 
 }

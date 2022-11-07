@@ -1,6 +1,5 @@
 package com.codegym.qltcbe.controller;
 
-import com.codegym.qltcbe.model.dto.UserDTO;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
