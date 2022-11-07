@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +68,9 @@ public class WalletController {
 
     @GetMapping("")
     public ResponseEntity<Iterable<Wallet>> getAllWallet(@RequestParam Long user_id) {
-        Iterable<Wallet> walletIterable = walletService.findWalletsByAppUserId(user_id);
+        Iterable<Wallet> walletIterable = walletService.findWalletsByAppUserIdAndStatus(user_id,1);
+        System.out.println(walletIterable);
         return new ResponseEntity<>(walletIterable, HttpStatus.OK);
     }
+
 }

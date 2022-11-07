@@ -33,7 +33,12 @@ public class WalletService  implements IWalletService{
     }
 
     @Override
-    public Iterable<Wallet> findWalletsByAppUserId(Long user_id) {
-        return walletRepo.findWalletsByAppUserId(user_id);
+    public Iterable<Wallet> findWalletsByAppUserIdAndStatus(Long user_id, int status) {
+        return walletRepo.findWalletsByAppUserIdAndStatus(user_id,status);
     }
+
+//    @Override
+//    public Iterable<Wallet> findWalletsByAppUserId(Long user_id) {
+//        return walletRepo.findWalletsByAppUserId(user_id);
+//    }
 }
