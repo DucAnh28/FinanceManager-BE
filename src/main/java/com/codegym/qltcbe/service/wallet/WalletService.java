@@ -1,10 +1,10 @@
 package com.codegym.qltcbe.service.wallet;
 
-import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;
 import com.codegym.qltcbe.repo.WalletRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
 @Service
@@ -37,8 +37,18 @@ public class WalletService  implements IWalletService{
         return walletRepo.findWalletsByAppUserIdAndStatus(user_id,status);
     }
 
-//    @Override
-//    public Iterable<Wallet> findWalletsByAppUserId(Long user_id) {
-//        return walletRepo.findWalletsByAppUserId(user_id);
-//    }
+    @Override
+    public long sumMoneyWalletByUser(@PathVariable int id) {
+        return walletRepo.sumMoneyWalletByUser(id);
+    }
+
+
+
+    @Override
+    public long addMoney(Long id, long money) {
+        long moneyWallet=walletRepo.findById(id).get().getMoney();
+        long totalMoney=moneyWallet+money;
+        return totalMoney;
+    }
+
 }

@@ -1,24 +1,13 @@
 package com.codegym.qltcbe.controller;
 
-import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Wallet;
 import com.codegym.qltcbe.service.user.IUserService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
-import com.codegym.qltcbe.service.wallet.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,7 +20,7 @@ public class WalletController {
     private IUserService userService;
 
     @PostMapping("/create")
-    public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet){
+    public ResponseEntity<Wallet> addWallet(@RequestBody Wallet wallet) {
         wallet.setStatus(1);
         return new ResponseEntity<>(walletService.save(wallet), HttpStatus.CREATED);
     }
@@ -68,9 +57,19 @@ public class WalletController {
 
     @GetMapping("")
     public ResponseEntity<Iterable<Wallet>> getAllWallet(@RequestParam Long user_id) {
-        Iterable<Wallet> walletIterable = walletService.findWalletsByAppUserIdAndStatus(user_id,1);
+        Iterable<Wallet> walletIterable = walletService.findWalletsByAppUserIdAndStatus(user_id, 1);
         System.out.println(walletIterable);
         return new ResponseEntity<>(walletIterable, HttpStatus.OK);
     }
+//@RequestMapping("/money")
+    @GetMapping("money/{id}")
+    public ResponseEntity<Long> sumWalletByUser(@PathVariable int id) {
+       long walletOptional = walletService.sumMoneyWalletByUser(id);
+        System.out.println(walletOptional);
+        return new ResponseEntity<>(walletOptional, HttpStatus.OK);
+    }
+    @PostMapping("addmoney")
+    public ResponseEntity<Wallet> addMoney(@RequestBody long money){
 
+    }
 }
