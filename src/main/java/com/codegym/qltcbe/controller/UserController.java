@@ -35,7 +35,7 @@ public class UserController {
         if (!userOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            if (appUser.getAva() == null) {
+            if (appUser.getAva() == null | appUser.getAva().equals("")) {
                 appUser.setAva(userOptional.get().getAva());
             }
             return new ResponseEntity<>(userService.save(appUser), HttpStatus.OK);
