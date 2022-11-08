@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class PaymentService implements IPaymentService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
+
     @Override
     public Payment save(Payment payment) {
         return paymentRepository.save(payment);
@@ -27,8 +29,8 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllByCategory_Id(Long id) {
-        return paymentRepository.findAllByCategory_Id(id);
+    public Iterable<Payment> findAllByCategory_Id(Long category_id) {
+        return paymentRepository.findAllByCategory_Id(category_id);
     }
 
     @Override
@@ -39,7 +41,12 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public void remove(Long id) {
-         paymentRepository.deleteById(id);
+        paymentRepository.deleteById(id);
+    }
+
+    @Override
+    public Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id) {
+        return null;
     }
 
 
