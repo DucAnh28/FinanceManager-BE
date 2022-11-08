@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class PaymentService implements IPaymentService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
+
     @Override
     public Payment save(Payment payment) {
         return paymentRepository.save(payment);
@@ -39,7 +41,7 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public void remove(Long id) {
-         paymentRepository.deleteById(id);
+        paymentRepository.deleteById(id);
     }
 
     @Override
