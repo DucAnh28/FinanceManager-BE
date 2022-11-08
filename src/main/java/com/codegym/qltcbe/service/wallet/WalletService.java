@@ -7,19 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Optional;
+
 @Service
-public class WalletService  implements IWalletService{
+public class WalletService implements IWalletService {
     @Autowired
     private WalletRepo walletRepo;
 
     @Override
     public Iterable<Wallet> findAll() {
         return walletRepo.findAll();
-    }
-
-    @Override
-    public Optional<Wallet> findById(Long id) {
-        return walletRepo.findById(id);
     }
 
     @Override
@@ -34,21 +30,25 @@ public class WalletService  implements IWalletService{
 
     @Override
     public Iterable<Wallet> findWalletsByAppUserIdAndStatus(Long user_id, int status) {
-        return walletRepo.findWalletsByAppUserIdAndStatus(user_id,status);
+        return walletRepo.findWalletsByAppUserIdAndStatus(user_id, status);
     }
 
     @Override
-    public long sumMoneyWalletByUser(@PathVariable int id) {
-        return walletRepo.sumMoneyWalletByUser(id);
+    public long sumMoneyWalletByUser(@PathVariable int id, int status) {
+        return walletRepo.sumMoneyWalletByUser(id, status);
     }
 
-
+    @Override
+    public Optional<Wallet> findById(Long id) {
+        return walletRepo.findById(id);
+    }
 
     @Override
     public long addMoney(Long id, long money) {
-        long moneyWallet=walletRepo.findById(id).get().getMoney();
-        long totalMoney=moneyWallet+money;
+      Optional<Wallet> thisWallet = walletRepo.findById(id);
+        long totalMoney = thisWallet.get().getMoney() + money;
+        thisWallet.get().setMoney(totalMoney);
+        walletRepo.save(thisWallet.get());
         return totalMoney;
     }
-
 }

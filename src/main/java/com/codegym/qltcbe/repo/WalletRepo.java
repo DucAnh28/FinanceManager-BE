@@ -15,6 +15,6 @@ public interface WalletRepo extends JpaRepository<Wallet, Long> {
     Iterable<Wallet> findWalletsByAppUserIdAndStatus (Long user_id,int status);
 
     @Query(nativeQuery = true,value = "select SUM(money) from wallet where app_user_id=?1 and status=1; ")
-    long sumMoneyWalletByUser(@PathVariable int id);
+    long sumMoneyWalletByUser(@PathVariable int id,int status);
 
 }

@@ -61,15 +61,16 @@ public class WalletController {
         System.out.println(walletIterable);
         return new ResponseEntity<>(walletIterable, HttpStatus.OK);
     }
-//@RequestMapping("/money")
-    @GetMapping("money/{id}")
+    @GetMapping("/money/{id}")
     public ResponseEntity<Long> sumWalletByUser(@PathVariable int id) {
-       long walletOptional = walletService.sumMoneyWalletByUser(id);
-        System.out.println(walletOptional);
+       long walletOptional = walletService.sumMoneyWalletByUser(id,1);
         return new ResponseEntity<>(walletOptional, HttpStatus.OK);
     }
-    @PostMapping("addmoney")
-    public ResponseEntity<Wallet> addMoney(@RequestBody long money){
-
+    @GetMapping("/addmoney/{id}")
+    public ResponseEntity<Long> addMoney(@PathVariable Long id,@RequestParam long money){
+        long current=walletService.addMoney(id,money);
+        System.out.println(current);
+        return new ResponseEntity<>(current, HttpStatus.OK);
     }
+
 }
