@@ -27,7 +27,10 @@ public class CategoryController {
         return new ResponseEntity<>(categoryService.findById(id).get(), HttpStatus.OK);
     }
 
-
+    @GetMapping
+    public ResponseEntity<Iterable<Category>> findAll() {
+        return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
+    }
 
     @PostMapping
     private ResponseEntity<Category> save(@RequestBody Category category) {
