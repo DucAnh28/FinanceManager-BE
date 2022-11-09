@@ -2,6 +2,7 @@ package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.dto.JwtResponse;
 import com.codegym.qltcbe.model.dto.LoginForm;
+import com.codegym.qltcbe.model.dto.TokenDto;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Role;
 import com.codegym.qltcbe.service.JwtService;
@@ -66,4 +67,7 @@ public class LoginController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
     }
+//
+//    @PostMapping("/oauth/fb")
+//    public ResponseEntity<TokenDto>
 }

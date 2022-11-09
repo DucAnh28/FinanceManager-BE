@@ -36,6 +36,9 @@ public class AppUser {
     @Column(columnDefinition = "int default 1")
     private int status;
 
+    @Column
+    private String gender;
+
     @Column()
     private String ava;
 
