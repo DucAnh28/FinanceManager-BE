@@ -40,8 +40,9 @@ public class PaymentService implements IPaymentService {
 
 
     @Override
-    public void remove(Long id) {
+    public Optional<Payment>  remove(Long id) {
         paymentRepository.deleteById(id);
+        return Optional.empty();
     }
 
     @Override

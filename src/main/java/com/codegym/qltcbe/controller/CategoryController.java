@@ -57,5 +57,10 @@ public class CategoryController {
         categoryService.save(optionalCategory.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/list/{id}")
+    private ResponseEntity<Iterable<Category>> showCateByUser(@PathVariable Long id){
+        return new ResponseEntity<>(categoryService.findAllByUserId(id),HttpStatus.OK);
+    }
 }
 

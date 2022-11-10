@@ -17,7 +17,6 @@ public class Category {
 
     private String name;
 
-    @Column(name = "user_id")
     @ManyToOne
     private AppUser appUser;
 

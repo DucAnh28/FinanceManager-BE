@@ -2,7 +2,6 @@ package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
 
-import javax.crypto.spec.OAEPParameterSpec;
 import java.util.Optional;
 
 public interface IPaymentService {
@@ -19,7 +18,7 @@ public interface IPaymentService {
     Iterable<Payment> findAllByWallet_Id(Long id);
 //
 
-    void remove(Long id);
+    Optional<Payment> remove(Long id);
 
 
 

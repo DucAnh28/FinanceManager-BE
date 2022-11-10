@@ -35,9 +35,9 @@ public class CategoryService implements ICategoryService {
 //        return categoryRepository.findAllByStatus(num, id);
 //    }
 
-//    @Override
-//    public Iterable<Category> findAllByUserId(Long id) {
-//        return categoryRepository.findAllByUserId(id);
-//    }
+    @Override
+    public Iterable<Category> findAllByUserId(Long id) {
+        return categoryRepository.findAllByUserId(id);
+    }
 }
 
