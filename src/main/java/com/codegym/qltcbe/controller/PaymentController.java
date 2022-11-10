@@ -55,6 +55,7 @@ public class PaymentController {
 
     @PostMapping
     private ResponseEntity<Payment> save(@RequestBody Payment payment) {
+        payment.setStatus(1);
         return new ResponseEntity<>(paymentService.save(payment), HttpStatus.OK);
     }
 
