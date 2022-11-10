@@ -7,11 +7,14 @@ import com.codegym.qltcbe.service.category.ICategoryService;
 import com.codegym.qltcbe.service.payment.IPaymentService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Optional;
 
 @Controller
@@ -116,4 +119,15 @@ public class PaymentController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 //
+    @GetMapping("find-all-by-time")
+    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
+        String month = String.valueOf(YearMonth.now());
+        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
+    }
+
+    @GetMapping("find-All-Transactions-during-time")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startTime") String startTime, @Param("endTime")String endTime) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startTime, endTime);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 }

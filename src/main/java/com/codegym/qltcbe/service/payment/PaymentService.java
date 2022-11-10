@@ -5,6 +5,10 @@ import com.codegym.qltcbe.repo.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.DatabaseMetaData;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 @Service
 public class PaymentService implements IPaymentService {
@@ -42,5 +46,9 @@ public class PaymentService implements IPaymentService {
          paymentRepository.deleteById(id);
     }
 
+    @Override
+    public Iterable<Payment> findAllTransactionsDuringTime(String startTime, String endTime) {
+        return paymentRepository.findAllTransactionsDuringTime(startTime,endTime);
+    }
 
 }
