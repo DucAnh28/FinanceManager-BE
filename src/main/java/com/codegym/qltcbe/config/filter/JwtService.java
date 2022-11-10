@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 
 public class JwtService {
-    private static final String SECRET_KEY = "11111111111111111111111111111111";
+    private static final String SECRET_KEY = "111111111111111111111";
     private static final long EXPIRE_TIME = 86400000000L;
     private static final Logger logger = LoggerFactory.getLogger(JwtService.class.getName());
 public String generateTokenLogin(Authentication authentication){
@@ -41,12 +41,12 @@ public String generateTokenLogin(Authentication authentication){
 
         return false;
     }
-    public String getUserNameFromJwtToken(String token) {
-
-        String userName = Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody().getSubject();
-        return userName;
-    }
+//    public String getUserNameFromJwtToken(String token) {
+//
+//        String userName = Jwts.parser()
+//                .setSigningKey(SECRET_KEY)
+//                .parseClaimsJws(token)
+//                .getBody().getSubject();
+//        return userName;
+//    }
 }
