@@ -54,5 +54,10 @@ public class CategoryController {
         categoryService.save(optionalCategory.get());
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping("/list")
+    public ResponseEntity<Iterable<Category>> getCategories() {
+        Iterable<Category> categoryList=categoryService.findAllByStatus(1);
+        return new ResponseEntity<>(categoryList,HttpStatus.OK);
+    };
 }
 

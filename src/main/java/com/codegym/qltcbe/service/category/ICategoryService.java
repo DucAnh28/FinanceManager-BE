@@ -14,4 +14,8 @@ public interface ICategoryService {
     void delete(Long id);
 
 
+
+    Iterable<Category> findAllByStatus(int status);
+
+    Iterable<Category> findAllByUserId(Long id);
 }
