@@ -21,12 +21,20 @@ public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
     Iterable<Payment> findAllByCategory_Id(Long category_id);
 
-    @Query(value = "select * from payment\n", nativeQuery = true)
-    Iterable<Payment> findAllTransactionsDuringTime1();
-@Query(value = "select * \n" +
+    @Query(value = "select *" +
             "from payment p\n" +
             "    join category c on c.id = p.category_id\n" +
             "    join wallet w on p.wallet_id = w.id\n" +
-            " where date BETWEEN CAST(:startTime AS DATE) AND CAST(:endTime AS DATE)" , nativeQuery = true)
-    Iterable<Payment> findAllTransactionsDuringTime(@Param("startTime") String startTime, @Param("endTime")String endTime);
+            " where date BETWEEN CAST(:startDate AS DATE) AND CAST(:endDate AS DATE)", nativeQuery = true)
+    Iterable<Payment> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
+
+    @Query(value = "select * from payment p\n" +
+            "    join category c on c.id = p.category_id\n" +
+            "    join wallet w on p.wallet_id = w.id\n" +
+            "where date BETWEEN CAST(:startDate AS DATE) AND CAST(:endDate AS DATE)\n"
+            + " and wallet_id = :wallet_id", nativeQuery = true)
+    Iterable<Payment> findAllTransactionDuringTimeByWallet(@Param("startDate") String startDate,
+                                                           @Param("endDate") String endDate,
+                                                           @Param("wallet_id") Long id);
 }

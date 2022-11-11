@@ -47,8 +47,13 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllTransactionsDuringTime(String startTime, String endTime) {
-        return paymentRepository.findAllTransactionsDuringTime(startTime,endTime);
+    public Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate) {
+        return paymentRepository.findAllTransactionsDuringTime(startDate,endDate);
+    }
+
+    @Override
+    public Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id) {
+        return paymentRepository.findAllTransactionDuringTimeByWallet(startDate, endDate, id);
     }
 
 }

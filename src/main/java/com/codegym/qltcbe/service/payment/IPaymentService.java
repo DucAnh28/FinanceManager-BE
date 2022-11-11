@@ -23,7 +23,7 @@ public interface IPaymentService {
 
     void remove(Long id);
 
-    Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id);
+    Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate);
 
-    Iterable<Payment> findAllTransactionsDuringTime(String startTime, String endTime);
+    Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id);
 }

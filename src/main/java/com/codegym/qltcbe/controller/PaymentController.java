@@ -119,15 +119,19 @@ public class PaymentController {
 //        return new ResponseEntity<>(HttpStatus.OK);
 //    }
 //
-    @GetMapping("find-all-by-time")
-    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
-        String month = String.valueOf(YearMonth.now());
-        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
-    }
 
     @GetMapping("find-All-Transactions-during-time")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startTime") String startTime, @Param("endTime")String endTime) {
-        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startTime, endTime);
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate")String endDate) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startDate, endDate);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
+
+    @GetMapping("find-All-Transactions-during-time-by-wallet")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate,
+                                                                           @Param("endDate") String endDate,
+                                                                           @Param("wallet_id") Long id){
+        Long walletId = Long.valueOf(id);
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 }
