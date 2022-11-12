@@ -14,4 +14,9 @@ public class LoginForm {
     @NotNull
     @Size(min = 6, max = 28)
     private String password;
+
+    public LoginForm(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
