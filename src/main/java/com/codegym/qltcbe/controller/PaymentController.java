@@ -55,6 +55,7 @@ public class PaymentController {
 
     @PostMapping
     private ResponseEntity<Payment> save(@RequestBody Payment payment) {
+        payment.setStatus(1);
         return new ResponseEntity<>(paymentService.save(payment), HttpStatus.OK);
     }
 
@@ -85,26 +86,27 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
+//        Optional<Payment> payment = paymentService.findById(id);
+//        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
+//        editWallet.get().setId(payment.get().getWallet().getId());
+//        if (payment.get().getCategory().getStatus() == 1) {
+//            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
+//        } else {
+//            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
+//        }
+//        walletService.save(editWallet.get());
+//        paymentService.remove(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
-        Optional<Payment> payment = paymentService.findById(id);
-        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
-        editWallet.get().setId(payment.get().getWallet().getId());
-        if (payment.get().getCategory().getStatus() == 1) {
-            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
-        } else {
-            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
-        }
-        walletService.save(editWallet.get());
-        paymentService.remove(id);
+        Optional<Payment> payment = paymentService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("find-all-by-time")
-//    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("status") int status, @RequestParam("id") int id) {
-//        String month = String.valueOf(YearMonth.now());
-//        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(status, month, id), HttpStatus.OK);
-//    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Optional<Payment>> updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
