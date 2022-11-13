@@ -17,19 +17,18 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Iterable<Category>> findAllByUser(@PathVariable Long id){
+        return new ResponseEntity<>(categoryService.findAllByUserAndStatus(id),HttpStatus.OK);
+    }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Category> findById(@PathVariable Long id) {
-        Optional<Category> categoryOptional = categoryService.findById(id);
+    @GetMapping("/find")
+    public ResponseEntity<Category> findById(@RequestParam Long cate_id) {
+        Optional<Category> categoryOptional = categoryService.findById(cate_id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(categoryService.findById(id).get(), HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<Iterable<Category>> findAll() {
-        return new ResponseEntity<>(categoryService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findById(cate_id).get(), HttpStatus.OK);
     }
 
     @PostMapping
@@ -56,11 +55,6 @@ public class CategoryController {
         optionalCategory.get().setStatus(0);
         categoryService.save(optionalCategory.get());
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping("/list/{id}")
-    private ResponseEntity<Iterable<Category>> showCateByUser(@PathVariable Long id){
-        return new ResponseEntity<>(categoryService.findAllByUserId(id),HttpStatus.OK);
     }
 }
 
