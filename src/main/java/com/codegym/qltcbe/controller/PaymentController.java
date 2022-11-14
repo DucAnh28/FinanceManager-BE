@@ -8,14 +8,11 @@ import com.codegym.qltcbe.service.payment.IPaymentService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
 import java.util.Optional;
 
 @Controller
@@ -44,21 +41,27 @@ public class PaymentController {
 
     @GetMapping("{id}")
     public ResponseEntity<Payment> findById(@PathVariable Long id) {
-        Optional<Payment> optionalTransaction = paymentService.findById(id);
-        if (!optionalTransaction.isPresent()) {
+        Optional<Payment> optionalPayment = paymentService.findById(id);
+        if (!optionalPayment.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(paymentService.findById(id).get(), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<Payment>> findAll() {
+        return new ResponseEntity<>(paymentService.findAll(), HttpStatus.OK);
+    }
+
     @PostMapping
     private ResponseEntity<Payment> save(@RequestBody Payment payment) {
+        payment.setStatus(1);
         return new ResponseEntity<>(paymentService.save(payment), HttpStatus.OK);
     }
 
 
     @PutMapping("{id}")
-    private ResponseEntity<Payment> update(@PathVariable Long id, @RequestBody  Payment payment) {
+    private ResponseEntity<Payment> update(@PathVariable Long id, @RequestBody Payment payment) {
         Optional<Payment> optionalPayment = paymentService.findById(id);
         if (!optionalPayment.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -83,54 +86,65 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
+//        Optional<Payment> payment = paymentService.findById(id);
+//        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
+//        editWallet.get().setId(payment.get().getWallet().getId());
+//        if (payment.get().getCategory().getStatus() == 1) {
+//            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
+//        } else {
+//            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
+//        }
+//        walletService.save(editWallet.get());
+//        paymentService.remove(id);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Payment> removeTransaction(@PathVariable Long id) {
-        Optional<Payment> payment = paymentService.findById(id);
-        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
-        editWallet.get().setId(payment.get().getWallet().getId());
-        if (payment.get().getCategory().getStatus() == 1) {
-            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
-        } else {
-            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
-        }
-        walletService.save(editWallet.get());
-        paymentService.remove(id);
+    public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
+        Optional<Payment> payment = paymentService.remove(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<Optional<Transaction>> updateTransaction(@PathVariable Long id, @RequestBody Transaction transaction) {
-//        Optional<Transaction> editTransaction = transactionService.findById(id);
-//        Optional<Wallet> wallet = walletService.findById(editTransaction.get().getWallet().getId());
-//        transaction.setId(id);
-//        int oldTransaction = editTransaction.get().getCategory().getStatus();
-//        int newTransaction = transaction.getCategory().getStatus();
-//        wallet.get().setId(wallet.get().getId());
-//        if ((oldTransaction == 1) && (newTransaction == 1)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() - editTransaction.get().getTotalSpent() + transaction.getTotalSpent());
-//        } else if ((oldTransaction == 1) && (newTransaction == 2)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() - editTransaction.get().getTotalSpent() - transaction.getTotalSpent());
-//        } else if ((oldTransaction == 2) && (newTransaction == 1)) {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() + editTransaction.get().getTotalSpent() + transaction.getTotalSpent());
-//        } else {
-//            wallet.get().setMoneyAmount(wallet.get().getMoneyAmount() + editTransaction.get().getTotalSpent() - transaction.getTotalSpent());
-//        }
-//        transactionService.save(transaction);
-//        walletService.save(wallet.get());
-//        return new ResponseEntity<>(HttpStatus.OK);
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Optional<Payment>> updatePayment(@PathVariable Long id, @RequestBody Payment payment) {
+        Optional<Payment> editPayment = paymentService.findById(id);
+        Optional<Wallet> wallet = walletService.findById(editPayment.get().getWallet().getId());
+        payment.setId(id);
+        int oldPayment = editPayment.get().getCategory().getStatus();
+        int newPayment = payment.getCategory().getStatus();
+        wallet.get().setId(wallet.get().getId());
+        if ((oldPayment == 1) && (newPayment == 1)) {
+            wallet.get().setMoney(wallet.get().getMoney() - editPayment.get().getMoney() + payment.getMoney());
+        } else if ((oldPayment == 1) && (newPayment == 2)) {
+            wallet.get().setMoney(wallet.get().getMoney() - editPayment.get().getMoney() - payment.getMoney());
+        } else if ((oldPayment == 2) && (newPayment == 1)) {
+            wallet.get().setMoney(wallet.get().getMoney() + editPayment.get().getMoney() + payment.getMoney());
+        } else {
+            wallet.get().setMoney(wallet.get().getMoney() + editPayment.get().getMoney() - payment.getMoney());
+        }
+        paymentService.save(payment);
+        walletService.save(wallet.get());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+//    @GetMapping("find-all-by-time2")
+//    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("id") int id) {
+//        String month = String.valueOf(YearMonth.now());
+//        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(2, month, id), HttpStatus.OK);
 //    }
 //
 
     @GetMapping("find-All-Transactions-during-time")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate")String endDate) {
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate) {
         Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startDate, endDate);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 
     @GetMapping("find-All-Transactions-during-time-by-wallet")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate,
-                                                                           @Param("endDate") String endDate,
-                                                                           @Param("wallet_id") Long id){
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long id) {
         Long walletId = Long.valueOf(id);
         Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
         return new ResponseEntity<>(payments, HttpStatus.OK);

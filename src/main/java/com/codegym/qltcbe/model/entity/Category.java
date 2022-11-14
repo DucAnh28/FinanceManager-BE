@@ -17,6 +17,9 @@ public class Category {
 
     private String name;
 
+    @ManyToOne
+    private AppUser appUser;
+
     @Column(columnDefinition = "int default 1")
     private int status;
 }

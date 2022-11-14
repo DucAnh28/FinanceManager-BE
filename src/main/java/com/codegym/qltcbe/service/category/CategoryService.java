@@ -28,17 +28,11 @@ public class CategoryService implements ICategoryService {
     @Override
     public void delete(Long id) {
         categoryRepository.deleteById(id);
-
     }
 
     @Override
-    public Iterable<Category> findAllByStatus(int num, Long id) {
-        return categoryRepository.findAllByStatus(num, id);
-    }
-
-    @Override
-    public Iterable<Category> findAllByUserId(Long id) {
-        return categoryRepository.findAllByUserId(id);
+    public Iterable<Category> findAllByUserAndStatus(Long id) {
+        return categoryRepository.findAllByUserAndStatus(id);
     }
 }
 

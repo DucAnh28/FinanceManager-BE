@@ -19,9 +19,8 @@ public interface IPaymentService {
 
     Iterable<Payment> findAllByWallet_Id(Long id);
 //
-//    Iterable<Payment> findAllByWallet(Long id);
 
-    void remove(Long id);
+    Optional<Payment> remove(Long id);
 
     Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate);
 

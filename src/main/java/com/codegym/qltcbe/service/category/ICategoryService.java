@@ -1,6 +1,7 @@
 package com.codegym.qltcbe.service.category;
 
 import com.codegym.qltcbe.model.entity.Category;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
@@ -13,7 +14,6 @@ public interface ICategoryService {
 
     void delete(Long id);
 
-    Iterable<Category> findAllByStatus(int num, Long id);
+    Iterable<Category> findAllByUserAndStatus(Long id);
 
-    Iterable<Category> findAllByUserId(Long id);
 }

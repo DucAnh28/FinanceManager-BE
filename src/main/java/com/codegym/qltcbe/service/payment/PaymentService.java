@@ -5,16 +5,14 @@ import com.codegym.qltcbe.repo.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.DatabaseMetaData;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
+
 @Service
 public class PaymentService implements IPaymentService {
 
     @Autowired
     private IPaymentRepository paymentRepository;
+
     @Override
     public Payment save(Payment payment) {
         return paymentRepository.save(payment);
@@ -31,8 +29,8 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllByCategory_Id(Long id) {
-        return paymentRepository.findAllByCategory_Id(id);
+    public Iterable<Payment> findAllByCategory_Id(Long category_id) {
+        return paymentRepository.findAllByCategory_Id(category_id);
     }
 
     @Override
@@ -42,13 +40,14 @@ public class PaymentService implements IPaymentService {
 
 
     @Override
-    public void remove(Long id) {
-         paymentRepository.deleteById(id);
+    public Optional<Payment> remove(Long id) {
+        paymentRepository.deleteById(id);
+        return Optional.empty();
     }
 
     @Override
     public Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate) {
-        return paymentRepository.findAllTransactionsDuringTime(startDate,endDate);
+        return paymentRepository.findAllTransactionsDuringTime(startDate, endDate);
     }
 
     @Override

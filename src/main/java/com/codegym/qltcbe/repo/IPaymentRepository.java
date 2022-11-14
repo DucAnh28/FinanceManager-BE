@@ -17,7 +17,12 @@ public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
 //    Iterable<Payment> findAllByCategory_Id(Long id);
 
+
+
+    @Query
     Iterable<Payment> findAllByWallet_Id(Long wallet_id);
+//    @Query
+//    Iterable<Payment> findAllByWalletAndStatus(Long wallet_id);
 
     Iterable<Payment> findAllByCategory_Id(Long category_id);
 
