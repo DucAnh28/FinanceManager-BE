@@ -7,12 +7,12 @@ import com.codegym.qltcbe.service.category.ICategoryService;
 import com.codegym.qltcbe.service.payment.IPaymentService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.YearMonth;
 import java.util.Optional;
 
 @Controller
@@ -135,6 +135,18 @@ public class PaymentController {
 //        String month = String.valueOf(YearMonth.now());
 //        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(2, month, id), HttpStatus.OK);
 //    }
+//
 
+    @GetMapping("find-All-Transactions-during-time")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startDate, endDate);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 
+    @GetMapping("find-All-Transactions-during-time-by-wallet")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long id) {
+        Long walletId = Long.valueOf(id);
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 }
