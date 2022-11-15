@@ -25,4 +25,6 @@ public interface IPaymentService {
     Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate);
 
     Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id);
+
+    Iterable<Payment> findAllTransactionsToday();
 }
