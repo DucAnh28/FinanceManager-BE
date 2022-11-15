@@ -86,20 +86,7 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
-//        Optional<Payment> payment = paymentService.findById(id);
-//        Optional<Wallet> editWallet = walletService.findById(payment.get().getWallet().getId());
-//        editWallet.get().setId(payment.get().getWallet().getId());
-//        if (payment.get().getCategory().getStatus() == 1) {
-//            editWallet.get().setMoney(editWallet.get().getMoney() - payment.get().getMoney());
-//        } else {
-//            editWallet.get().setMoney(editWallet.get().getMoney() + payment.get().getMoney());
-//        }
-//        walletService.save(editWallet.get());
-//        paymentService.remove(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
@@ -130,11 +117,6 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @GetMapping("find-all-by-time2")
-//    public ResponseEntity<Iterable<Payment>> findAllByMonthTimeAndYearTime(@RequestParam("id") int id) {
-//        String month = String.valueOf(YearMonth.now());
-//        return new ResponseEntity<>(paymentService.findAllByMonthTimeAndYearTime(2, month, id), HttpStatus.OK);
-//    }
 
 
 }

@@ -1,8 +1,10 @@
 package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.entity.AppUser;
+import com.codegym.qltcbe.model.entity.Notification;
 import com.codegym.qltcbe.model.entity.ShareWallet;
 import com.codegym.qltcbe.model.entity.Wallet;
+import com.codegym.qltcbe.service.notification.NotificationService;
 import com.codegym.qltcbe.service.shareWallet.IShareWalletService;
 import com.codegym.qltcbe.service.user.UserService;
 import com.codegym.qltcbe.service.wallet.WalletService;
@@ -26,6 +28,8 @@ public class ShareWalletController {
     private UserService userService;
     @Autowired
     private WalletService walletService;
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/list/{userId}")
     public ResponseEntity<List<Wallet>> findALlSharedWallet(@PathVariable Long userId) {
@@ -61,12 +65,12 @@ public class ShareWalletController {
                         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
                     }
                 }
-//                Notification n = new Notification(
-//                        wallet.getUser().getUsername() + " đã chia sẻ ví "+ wallet.getName()+ " với bạn",
-//                        wallet.getUser(),
-//                        user1
-//                );
-//                notificationService.save(n);
+                Notification n = new Notification(
+                        wallet.getAppUser().getUsername() + " đã chia sẻ ví "+ wallet.getName()+ " với bạn",
+                        wallet.getAppUser(),
+                        user1
+                );
+                notificationService.save(n);
                 shareWalletService.save(shareWallet);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
