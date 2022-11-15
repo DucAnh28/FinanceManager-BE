@@ -151,8 +151,8 @@ public class PaymentController {
     }
 
     @GetMapping("find-All-Transactions-Today")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsToday() {
-        Iterable<Payment> payments = paymentService.findAllTransactionsToday();
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsToday(@RequestParam Long user_id) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsToday(user_id);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 }

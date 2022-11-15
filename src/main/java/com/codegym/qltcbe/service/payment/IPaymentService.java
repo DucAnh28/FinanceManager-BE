@@ -1,6 +1,7 @@
 package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
+import org.springframework.data.repository.query.Param;
 
 import javax.crypto.spec.OAEPParameterSpec;
 import java.time.LocalDate;
@@ -26,5 +27,6 @@ public interface IPaymentService {
 
     Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id);
 
-    Iterable<Payment> findAllTransactionsToday();
+    Iterable<Payment> findAllTransactionsToday(@Param("user_id") Long id);
+
 }

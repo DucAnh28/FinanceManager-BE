@@ -35,7 +35,8 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Iterable<Payment> findAllByWallet_Id(Long wallet_id) {
-        return paymentRepository.findAllByWallet_Id(wallet_id);
+        return paymentRepository
+                .findAllByWallet_Id(wallet_id);
     }
 
 
@@ -56,8 +57,7 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllTransactionsToday() {
-        return paymentRepository.findAllTransactionsToday();
+    public Iterable<Payment> findAllTransactionsToday(Long id) {
+        return findAllTransactionsToday(id);
     }
-
 }
