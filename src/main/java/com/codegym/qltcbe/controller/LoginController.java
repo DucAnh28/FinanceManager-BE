@@ -6,6 +6,7 @@ import com.codegym.qltcbe.model.dto.TokenDto;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Role;
 import com.codegym.qltcbe.service.JwtService;
+import com.codegym.qltcbe.service.category.ICategoryService;
 import com.codegym.qltcbe.service.role.IRoleService;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.User;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -36,6 +40,8 @@ public class LoginController {
     private IUserService userService;
     @Autowired
     private IRoleService roleService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginForm user) {
@@ -62,7 +68,8 @@ public class LoginController {
             user.setRoles(roles);
             user.setAva("https://toigingiuvedep.vn/wp-content/uploads/2021/05/avatar-trang-hai.jpg");
             user.setStatus(1);
-            return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+            userService.save(user);
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
@@ -71,7 +78,7 @@ public class LoginController {
     @PostMapping("/oauth/fb")
     public ResponseEntity<JwtResponse> facebook(@RequestBody TokenDto tokenDto) throws IOException {
         Facebook facebook = new FacebookTemplate(tokenDto.getValue());
-        final String[] fields = {"email","name"};
+        final String[] fields = {"email", "name"};
         User user = facebook.fetchObject("me", User.class, fields);
         String userName = user.getName();
         AppUser userFace = new AppUser();
