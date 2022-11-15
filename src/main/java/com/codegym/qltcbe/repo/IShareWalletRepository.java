@@ -13,10 +13,10 @@ import java.util.List;
 @Transactional
 public interface IShareWalletRepository extends JpaRepository<ShareWallet, Long> {
     @Modifying
-    @Query(value = "select wallet_id from share_wallet where user_id = ?1", nativeQuery = true)
+    @Query(value = "select wallet_id from share_wallet where app_user_id = ?1", nativeQuery = true)
     List<Long> findListWalletShare(Long id);
 
     @Modifying
-    @Query(value = "select user_id from share_wallet where wallet_id = ?1", nativeQuery = true)
+    @Query(value = "select app_user_id from share_wallet where wallet_id = ?1", nativeQuery = true)
     List<Long> findWhoWasShared(Long id);
 }

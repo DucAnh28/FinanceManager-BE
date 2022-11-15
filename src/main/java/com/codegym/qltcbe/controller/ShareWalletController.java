@@ -6,6 +6,7 @@ import com.codegym.qltcbe.model.entity.Wallet;
 import com.codegym.qltcbe.service.shareWallet.IShareWalletService;
 import com.codegym.qltcbe.service.user.UserService;
 import com.codegym.qltcbe.service.wallet.WalletService;
+import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/share")
@@ -29,11 +31,12 @@ public class ShareWalletController {
     public ResponseEntity<List<Wallet>> findALlSharedWallet(@PathVariable Long userId) {
         List<Wallet> wallets = new ArrayList<>();
         List<Long> list = shareWalletService.findListWalletShare(userId);
-        for (int i = 0 ; i < list.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             wallets.add(walletService.findById(list.get(i)).get());
         }
         return new ResponseEntity<>(wallets, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{shareId}")
     public ResponseEntity<ShareWallet> delete(@PathVariable Long shareId) {
         this.shareWalletService.remove(shareId);
@@ -44,6 +47,7 @@ public class ShareWalletController {
     public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestParam(name = "username") String username) {
         List<AppUser> appUsers = (List<AppUser>) userService.findAll();
         for (AppUser appUser : appUsers) {
+
             if (appUser.getUsername().equals(username)) {
                 AppUser user1= userService.getUserByUsername(username);
                 Wallet wallet = walletService.findById(walletId).get();
@@ -69,4 +73,21 @@ public class ShareWalletController {
         }
         return null;
     }
+
+//    @PostMapping("/create/{walletId}")
+//    public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestBody AppUser appUser) {
+//        Wallet wallet = walletService.findById(walletId).get();
+//        if (wallet.getAppUser().getId() == appUser.getId()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//        ShareWallet shareWallet = new ShareWallet(appUser, wallet);
+//        List<ShareWallet> shareWallets = (List<ShareWallet>) shareWalletService.findAll();
+//        for (ShareWallet shareWallet1 : shareWallets) {
+//            if (shareWallet1.getWallet().getId() == shareWallet.getWallet().getId() && shareWallet1.getAppUser().getId() == shareWallet.getAppUser().getId()) {
+//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//            }
+//        }
+//        return null;
+//    }
 }
+
