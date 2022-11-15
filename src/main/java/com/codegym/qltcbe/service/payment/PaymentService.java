@@ -52,7 +52,12 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id) {
-        return paymentRepository.findAllTransactionDuringTimeByWallet(startDate, endDate, id);
+        return paymentRepository.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
+    }
+
+    @Override
+    public Iterable<Payment> findAllTransactionsToday() {
+        return paymentRepository.findAllTransactionsToday();
     }
 
 }
