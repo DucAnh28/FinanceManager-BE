@@ -37,7 +37,7 @@ public class AppUser {
     private int status;
 
     @Column
-    private String gender;
+    private String address;
 
     @Column()
     private String ava;
