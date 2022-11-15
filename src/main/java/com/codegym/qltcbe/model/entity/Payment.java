@@ -37,4 +37,8 @@ public class Payment {
 
     @Column(columnDefinition = "int default 1")
     private int status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private AppUser appUser;
 }

@@ -149,4 +149,10 @@ public class PaymentController {
         Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
+
+    @GetMapping("find-All-Transactions-Today")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsToday(@RequestParam Long user_id) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsToday(user_id);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 }
