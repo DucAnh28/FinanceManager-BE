@@ -1,7 +1,9 @@
 package com.codegym.qltcbe.controller;
 
 import com.codegym.qltcbe.model.dto.ChangePasswordDTO;
+import com.codegym.qltcbe.model.dto.Mail;
 import com.codegym.qltcbe.model.entity.AppUser;
+import com.codegym.qltcbe.service.mail.IMailService;
 import com.codegym.qltcbe.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private IMailService mailService;
 
     @GetMapping("/{id}")
     public ResponseEntity<AppUser> getUserById(@PathVariable Long id) {
@@ -51,7 +56,8 @@ public class UserController {
             userOptional.get().setPassword(changePasswordDTO.getNewPassword());
             return new ResponseEntity<>(userService.save(userOptional.get()), HttpStatus.ACCEPTED);
         } else {
-                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
     }
+
 }

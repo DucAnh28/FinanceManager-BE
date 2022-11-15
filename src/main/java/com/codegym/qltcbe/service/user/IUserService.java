@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface IUserService extends IGeneralService<AppUser>, UserDetailsService {
     UserDetails loadUserByUsername(String username);
 
-
     AppUser getUserByUsername(String username);
+
+    AppUser findAppUserByEmail(String email);
 }
