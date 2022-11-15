@@ -7,12 +7,12 @@ import com.codegym.qltcbe.service.category.ICategoryService;
 import com.codegym.qltcbe.service.payment.IPaymentService;
 import com.codegym.qltcbe.service.wallet.IWalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.YearMonth;
 import java.util.Optional;
 
 @Controller
@@ -86,8 +86,6 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Payment> removePayment(@PathVariable Long id) {
         Optional<Payment> payment = paymentService.remove(id);
@@ -117,6 +115,22 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("find-All-Transactions-during-time")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTime(startDate, endDate);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 
+    @GetMapping("find-All-Transactions-during-time-by-wallet")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long id) {
+        Long walletId = Long.valueOf(id);
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 
+    @GetMapping("find-All-Transactions-Today")
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsToday(@RequestParam Long user_id) {
+        Iterable<Payment> payments = paymentService.findAllTransactionsToday(user_id);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
 }

@@ -6,9 +6,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
+
+
 @Setter
 @RequiredArgsConstructor
 public class Payment {
@@ -34,4 +37,8 @@ public class Payment {
 
     @Column(columnDefinition = "int default 1")
     private int status;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private AppUser appUser;
 }

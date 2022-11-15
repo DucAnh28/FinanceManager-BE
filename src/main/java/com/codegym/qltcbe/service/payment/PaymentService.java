@@ -35,20 +35,29 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Iterable<Payment> findAllByWallet_Id(Long wallet_id) {
-        return paymentRepository.findAllByWallet_Id(wallet_id);
+        return paymentRepository
+                .findAllByWallet_Id(wallet_id);
     }
 
 
     @Override
-    public Optional<Payment>  remove(Long id) {
+    public Optional<Payment> remove(Long id) {
         paymentRepository.deleteById(id);
         return Optional.empty();
     }
 
     @Override
-    public Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id) {
-        return null;
+    public Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate) {
+        return paymentRepository.findAllTransactionsDuringTime(startDate, endDate);
     }
 
+    @Override
+    public Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id) {
+        return paymentRepository.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
+    }
 
+    @Override
+    public Iterable<Payment> findAllTransactionsToday(Long id) {
+        return findAllTransactionsToday(id);
+    }
 }

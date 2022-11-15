@@ -1,7 +1,10 @@
 package com.codegym.qltcbe.service.payment;
 
 import com.codegym.qltcbe.model.entity.Payment;
+import org.springframework.data.repository.query.Param;
 
+import javax.crypto.spec.OAEPParameterSpec;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public interface IPaymentService {
@@ -20,14 +23,10 @@ public interface IPaymentService {
 
     Optional<Payment> remove(Long id);
 
+    Iterable<Payment> findAllTransactionsDuringTime(String startDate, String endDate);
 
+    Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id);
 
-    Iterable<Payment> findAllByMonthTimeAndYearTime(int status, String month, int id);
-//
-//    Iterable<Payment> findAllPaymentIncomeFor6Months(Long id, String presentTime, String sixMonthsAgo);
-//
-//    Iterable<Payment> findAllPaymentExpenseFor6Months(Long id, String presentTime, String sixMonthsAgo);
-//
-//    Iterable<Payment> findAllByPayment(String startTime, String endTime, Long status, Long from, Long to, Long id);
+    Iterable<Payment> findAllTransactionsToday(@Param("user_id") Long id);
 
 }

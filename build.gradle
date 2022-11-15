@@ -27,7 +27,11 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
+    // login with FB
     implementation 'org.springframework.boot:spring-boot-starter-social-facebook:1.5.22.RELEASE'
+    // Mail
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
