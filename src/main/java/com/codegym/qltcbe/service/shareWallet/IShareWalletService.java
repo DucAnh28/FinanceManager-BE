@@ -10,4 +10,8 @@ public interface IShareWalletService extends IGeneralService<ShareWallet> {
 
     List<Long> findWhoWasShared(Long id);
 
+
+
+
+
 }
