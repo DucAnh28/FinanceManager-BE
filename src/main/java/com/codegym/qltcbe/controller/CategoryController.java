@@ -1,7 +1,10 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Category;
+import com.codegym.qltcbe.model.entity.Payment;
 import com.codegym.qltcbe.service.category.CategoryService;
+import com.codegym.qltcbe.service.payment.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +21,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Iterable<Category>> findAllByUser(@PathVariable Long id){
-        return new ResponseEntity<>(categoryService.findAllByUserAndStatus(id),HttpStatus.OK);
+    public ResponseEntity<Iterable<Category>> findAllByUser(@PathVariable Long id) {
+        return new ResponseEntity<>(categoryService.findAllByUserAndStatus(id), HttpStatus.OK);
     }
 
     @GetMapping("/find")
@@ -37,13 +40,13 @@ public class CategoryController {
     }
 
     @PutMapping("{id}")
-    private ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category) {
+    private ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category, @RequestBody AppUser appUser) {
         Optional<Category> categoryOptional = categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         category.setId(id);
-        return new ResponseEntity<>(categoryService.save(category), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.saveOrEdit(category, appUser.getId()), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
@@ -53,8 +56,7 @@ public class CategoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         optionalCategory.get().setStatus(0);
-        categoryService.save(optionalCategory.get());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.saveOrEdit(optionalCategory.get(), optionalCategory.get().getAppUser().getId()), HttpStatus.OK);
     }
 }
 

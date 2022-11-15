@@ -4,6 +4,7 @@ import com.codegym.qltcbe.model.dto.JwtResponse;
 import com.codegym.qltcbe.model.dto.LoginForm;
 import com.codegym.qltcbe.model.dto.TokenDto;
 import com.codegym.qltcbe.model.entity.AppUser;
+import com.codegym.qltcbe.model.entity.Category;
 import com.codegym.qltcbe.model.entity.Role;
 import com.codegym.qltcbe.service.JwtService;
 import com.codegym.qltcbe.service.category.ICategoryService;
@@ -69,7 +70,8 @@ public class LoginController {
             user.setAva("https://toigingiuvedep.vn/wp-content/uploads/2021/05/avatar-trang-hai.jpg");
             user.setStatus(1);
             userService.save(user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            categoryService.save(new Category("Other", userService.getUserByUsername(user.getUsername()), 1));
+            return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
