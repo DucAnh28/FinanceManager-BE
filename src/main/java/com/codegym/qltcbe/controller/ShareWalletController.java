@@ -51,6 +51,7 @@ public class ShareWalletController {
 
     @PostMapping("create/{walletId}")
     public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestParam(name = "username") String username) {
+
         List<AppUser> appUsers = (List<AppUser>) userService.findAll();
         for (AppUser appUser : appUsers) {
 
@@ -79,6 +80,7 @@ public class ShareWalletController {
                 mail.setMailSubject("One For All Team");
                 mail.setMailContent("Ban Da Duoc "+wallet.getAppUser().getUsername()+" chia se vi "+wallet.getName());
                 mailService.sendEmail(mail);
+                shareWallet.setStatus(1);
                 shareWalletService.save(shareWallet);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
@@ -86,20 +88,5 @@ public class ShareWalletController {
         return null;
     }
 
-//    @PostMapping("/create/{walletId}")
-//    public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestBody AppUser appUser) {
-//        Wallet wallet = walletService.findById(walletId).get();
-//        if (wallet.getAppUser().getId() == appUser.getId()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        ShareWallet shareWallet = new ShareWallet(appUser, wallet);
-//        List<ShareWallet> shareWallets = (List<ShareWallet>) shareWalletService.findAll();
-//        for (ShareWallet shareWallet1 : shareWallets) {
-//            if (shareWallet1.getWallet().getId() == shareWallet.getWallet().getId() && shareWallet1.getAppUser().getId() == shareWallet.getAppUser().getId()) {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//        }
-//        return null;
-//    }
 }
 

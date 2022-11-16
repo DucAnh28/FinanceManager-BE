@@ -14,6 +14,8 @@ public class ShareWallet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(columnDefinition = "int default 1")
+    private int status;
     @ManyToOne
     private AppUser appUser;
 
