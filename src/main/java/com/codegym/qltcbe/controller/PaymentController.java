@@ -1,5 +1,7 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.dto.IPaymentInADayDTO;
+import com.codegym.qltcbe.model.dto.SumInDay;
 import com.codegym.qltcbe.model.entity.Category;
 import com.codegym.qltcbe.model.entity.Payment;
 import com.codegym.qltcbe.model.entity.Wallet;
@@ -124,13 +126,19 @@ public class PaymentController {
     @GetMapping("find-All-Transactions-during-time-by-wallet")
     public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long id) {
         Long walletId = Long.valueOf(id);
-        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, id);
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, walletId);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 
     @GetMapping("find-All-Transactions-Today")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsToday(@RequestParam Long user_id) {
-        Iterable<Payment> payments = paymentService.findAllTransactionsToday(user_id);
+    public ResponseEntity<Iterable<IPaymentInADayDTO>> findAllTransactionsToday(@Param("user_id") Long user_id) {
+        Iterable<IPaymentInADayDTO> payments = paymentService.findAllTransactionsToday(user_id);
+        return new ResponseEntity<>(payments, HttpStatus.OK);
+    }
+
+    @GetMapping("getSumMoney")
+    public ResponseEntity<Iterable<SumInDay>> getSumMoney(@Param("user_id") Long user_id) {
+        Iterable<SumInDay> payments = paymentService.getSumMoney(user_id);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 }
