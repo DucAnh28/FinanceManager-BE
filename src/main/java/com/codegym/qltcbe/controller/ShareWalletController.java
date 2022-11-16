@@ -8,7 +8,6 @@ import com.codegym.qltcbe.service.notification.NotificationService;
 import com.codegym.qltcbe.service.shareWallet.IShareWalletService;
 import com.codegym.qltcbe.service.user.UserService;
 import com.codegym.qltcbe.service.wallet.WalletService;
-import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/share")
