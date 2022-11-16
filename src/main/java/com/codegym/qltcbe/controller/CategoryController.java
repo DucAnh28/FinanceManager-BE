@@ -33,6 +33,7 @@ public class CategoryController {
 
     @PostMapping
     private ResponseEntity<Category> save(@RequestBody Category category) {
+        category.setStatus(1);
         return new ResponseEntity<>(categoryService.save(category), HttpStatus.OK);
     }
 
@@ -42,7 +43,7 @@ public class CategoryController {
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(categoryService.saveOrEdit(category, category.getAppUser().getId()), HttpStatus.OK);
+            return new ResponseEntity<>(categoryService.editCategory(category, category.getAppUser().getId()), HttpStatus.OK);
         }
     }
 
@@ -52,8 +53,7 @@ public class CategoryController {
         if (!optionalCategory.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        optionalCategory.get().setStatus(0);
-        return new ResponseEntity<>(categoryService.saveOrEdit(optionalCategory.get(), optionalCategory.get().getAppUser().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.softDelete(optionalCategory.get(), optionalCategory.get().getAppUser().getId()), HttpStatus.OK);
     }
 }
 
