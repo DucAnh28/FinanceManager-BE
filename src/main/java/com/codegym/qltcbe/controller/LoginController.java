@@ -69,9 +69,9 @@ public class LoginController {
             user.setRoles(roles);
             user.setAva("https://toigingiuvedep.vn/wp-content/uploads/2021/05/avatar-trang-hai.jpg");
             user.setStatus(1);
-            userService.save(user);
+            AppUser appUser = userService.save(user);
             categoryService.save(new Category("Other", userService.getUserByUsername(user.getUsername()), 1));
-            return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
+            return new ResponseEntity<>(appUser, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
@@ -96,6 +96,7 @@ public class LoginController {
             userFace.setRoles(roles);
         }
         userService.save(userFace);
+        categoryService.save(new Category("Other", userService.getUserByUsername(userFace.getUsername()), 1));
         LoginForm loginForm = new LoginForm(userFace.getUsername(), userFace.getPassword());
         ResponseEntity<JwtResponse> jwtResponseResponseEntity = login(loginForm);
         return jwtResponseResponseEntity;
