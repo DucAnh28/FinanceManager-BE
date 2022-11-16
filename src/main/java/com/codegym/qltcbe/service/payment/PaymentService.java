@@ -58,6 +58,6 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Iterable<Payment> findAllTransactionsToday(Long id) {
-        return findAllTransactionsToday(id);
+        return paymentRepository.findAllTransactionsToday(id);
     }
 }
