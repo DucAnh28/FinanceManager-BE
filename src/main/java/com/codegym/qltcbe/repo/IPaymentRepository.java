@@ -6,13 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query
     Iterable<Payment> findAllByWallet_Id(Long wallet_id);
 
-    Iterable<Payment> findAllByCategory_Id(Long category_id);
+    List<Payment> findAllByCategory_Id(Long category_id);
 
     @Query(value = "select *" +
             "from payment p\n" +
@@ -36,4 +38,8 @@ public interface IPaymentRepository extends JpaRepository<Payment, Long> {
             "    join wallet w on p.wallet_id = w.id\n" +
             "    where date = curdate() and p.user_id = :user_id", nativeQuery = true)
     Iterable<Payment> findAllTransactionsToday(@Param("user_id") Long id);
+
+//    @Query(value = "select * from payment p join category c on c.id = p.category_id " +
+//            "where p.category_id = :id",nativeQuery = true)
+//    Iterable<Payment> findAllByCategoryHasId(@Param("id") Long id);
 }

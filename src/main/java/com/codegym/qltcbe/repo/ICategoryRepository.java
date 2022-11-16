@@ -5,11 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 @Repository
-public interface ICategoryRepository extends JpaRepository<Category,Long> {
+public interface ICategoryRepository extends JpaRepository<Category, Long> {
 
-@Query(value = "select * from category c where c.app_user_id = :id and status = 1",nativeQuery = true)
-Iterable<Category> findAllByUserAndStatus(@Param("id") Long id);
+    @Query(value = "select * from category c where c.app_user_id = :id and status = 1", nativeQuery = true)
+    Iterable<Category> findAllByUserAndStatus(@Param("id") Long id);
 
+    @Query(value = "select * from category c where name = 'Other' and c.app_user_id = :id",nativeQuery = true)
+    Category findDefaultCategoryByUser(@Param("id") Long id);
 }
 

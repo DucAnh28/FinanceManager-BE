@@ -5,6 +5,7 @@ import com.codegym.qltcbe.repo.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -29,7 +30,7 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllByCategory_Id(Long category_id) {
+    public List<Payment> findAllByCategory_Id(Long category_id) {
         return paymentRepository.findAllByCategory_Id(category_id);
     }
 
@@ -58,6 +59,6 @@ public class PaymentService implements IPaymentService {
 
     @Override
     public Iterable<Payment> findAllTransactionsToday(Long id) {
-        return findAllTransactionsToday(id);
+        return paymentRepository.findAllTransactionsToday(id);
     }
 }

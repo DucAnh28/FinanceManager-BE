@@ -18,8 +18,8 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Iterable<Category>> findAllByUser(@PathVariable Long id){
-        return new ResponseEntity<>(categoryService.findAllByUserAndStatus(id),HttpStatus.OK);
+    public ResponseEntity<Iterable<Category>> findAllByUser(@PathVariable Long id) {
+        return new ResponseEntity<>(categoryService.findAllByUserAndStatus(id), HttpStatus.OK);
     }
 
     @GetMapping("/find")
@@ -41,9 +41,9 @@ public class CategoryController {
         Optional<Category> categoryOptional = categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(categoryService.saveOrEdit(category, category.getAppUser().getId()), HttpStatus.OK);
         }
-        category.setId(id);
-        return new ResponseEntity<>(categoryService.save(category), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
@@ -53,8 +53,7 @@ public class CategoryController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         optionalCategory.get().setStatus(0);
-        categoryService.save(optionalCategory.get());
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.saveOrEdit(optionalCategory.get(), optionalCategory.get().getAppUser().getId()), HttpStatus.OK);
     }
 }
 

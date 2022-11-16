@@ -22,4 +22,10 @@ public class Category {
 
     @Column(columnDefinition = "int default 1")
     private int status;
+
+    public Category(String name, AppUser appUser, int status) {
+        this.name = name;
+        this.appUser = appUser;
+        this.status = status;
+    }
 }
