@@ -1,10 +1,7 @@
 package com.codegym.qltcbe.controller;
 
-import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Category;
-import com.codegym.qltcbe.model.entity.Payment;
 import com.codegym.qltcbe.service.category.CategoryService;
-import com.codegym.qltcbe.service.payment.IPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,13 +37,13 @@ public class CategoryController {
     }
 
     @PutMapping("{id}")
-    private ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category, @RequestBody AppUser appUser) {
+    private ResponseEntity<Category> update(@PathVariable Long id, @RequestBody Category category) {
         Optional<Category> categoryOptional = categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(categoryService.saveOrEdit(category, category.getAppUser().getId()), HttpStatus.OK);
         }
-        category.setId(id);
-        return new ResponseEntity<>(categoryService.saveOrEdit(category, appUser.getId()), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")

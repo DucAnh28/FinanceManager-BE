@@ -19,7 +19,7 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Category saveOrEdit(Category category, Long userId) {
-        if (checkDefaultCategory(category, userId)) {
+        if (category.getId() == findDefaultCategoryByUser(category.getAppUser().getId()).getId()) {
             return null;
         } else {
             List<Payment> payments = paymentService.findAllByCategory_Id(category.getId());
@@ -53,12 +53,6 @@ public class CategoryService implements ICategoryService {
     @Override
     public Iterable<Category> findAllByUserAndStatus(Long id) {
         return categoryRepository.findAllByUserAndStatus(id);
-    }
-
-    private boolean checkDefaultCategory(Category category, Long userId) {
-        if (category == categoryRepository.findDefaultCategoryByUser(userId)) {
-            return true;
-        } else return false;
     }
 
     @Override

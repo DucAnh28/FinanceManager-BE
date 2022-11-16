@@ -19,4 +19,6 @@ public interface ICategoryService {
 
     Category findDefaultCategoryByUser(Long id);
 
+//    Category checkDefaultCategory(Category category, Long userId);
+
 }
