@@ -1,5 +1,7 @@
 package com.codegym.qltcbe.service.payment;
 
+import com.codegym.qltcbe.model.dto.IPaymentInADayDTO;
+import com.codegym.qltcbe.model.dto.SumInDay;
 import com.codegym.qltcbe.model.entity.Payment;
 import org.springframework.data.repository.query.Param;
 
@@ -23,7 +25,7 @@ public interface IPaymentService {
 
     Iterable<Payment> findAllTransactionsDuringTimeByWallet(String startDate, String endDate, Long id);
 
-    Iterable<Payment> findAllTransactionsToday(@Param("user_id") Long id);
-
+    Iterable<IPaymentInADayDTO> findAllTransactionsToday(@Param("user_id") Long id);
+    Iterable<SumInDay> getSumMoney(@Param("user_id") Long id);
 
 }
