@@ -1,5 +1,7 @@
 package com.codegym.qltcbe.service.payment;
 
+import com.codegym.qltcbe.model.dto.IPaymentInADayDTO;
+import com.codegym.qltcbe.model.dto.SumInDay;
 import com.codegym.qltcbe.model.entity.Payment;
 import com.codegym.qltcbe.repo.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +59,12 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Iterable<Payment> findAllTransactionsToday(Long id) {
+    public Iterable<IPaymentInADayDTO> findAllTransactionsToday(Long id) {
         return paymentRepository.findAllTransactionsToday(id);
+    }
+
+    @Override
+    public Iterable<SumInDay> getSumMoney(Long id) {
+        return paymentRepository.getSumInDay(id);
     }
 }
