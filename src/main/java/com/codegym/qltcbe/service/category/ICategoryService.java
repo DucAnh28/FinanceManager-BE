@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ICategoryService {
+    Category saveOrEdit(Category category,Long userId);
     Category save(Category category);
 
     Iterable<Category> findAll();
@@ -15,5 +16,9 @@ public interface ICategoryService {
     void delete(Long id);
 
     Iterable<Category> findAllByUserAndStatus(Long id);
+
+    Category findDefaultCategoryByUser(Long id);
+
+//    Category checkDefaultCategory(Category category, Long userId);
 
 }

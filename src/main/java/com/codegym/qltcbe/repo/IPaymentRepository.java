@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query
     Iterable<Payment> findAllByWallet_Id(Long wallet_id);
 
-    Iterable<Payment> findAllByCategory_Id(Long category_id);
+    List<Payment> findAllByCategory_Id(Long category_id);
 
     @Query(value = "select *" +
             "from payment p\n" +

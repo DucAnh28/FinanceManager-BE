@@ -7,22 +7,25 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class ShareWallet {
+@AllArgsConstructor
+@Data
+public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private AppUser appUser;
+
+    private String content;
 
     @ManyToOne
-    private Wallet wallet;
+    private AppUser user1;
 
-    public ShareWallet(AppUser appUser, Wallet wallet) {
-        this.appUser = appUser;
-        this.wallet = wallet;
+    @ManyToOne
+    private AppUser user2;
+
+    public Notification(String content, AppUser user1, AppUser user2) {
+        this.content = content;
+        this.user1 = user1;
+        this.user2 = user2;
     }
-
 }

@@ -5,6 +5,7 @@ import com.codegym.qltcbe.model.dto.SumInDay;
 import com.codegym.qltcbe.model.entity.Payment;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IPaymentService {
@@ -14,12 +15,9 @@ public interface IPaymentService {
 
     Optional<Payment> findById(Long id);
 
-
-
-    Iterable<Payment> findAllByCategory_Id(Long id);
+    List<Payment> findAllByCategory_Id(Long id);
 
     Iterable<Payment> findAllByWallet_Id(Long id);
-//
 
     Optional<Payment> remove(Long id);
 
