@@ -51,6 +51,7 @@ public class ShareWalletController {
 
     @PostMapping("create/{walletId}")
     public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestParam(name = "username") String username) {
+
         List<AppUser> appUsers = (List<AppUser>) userService.findAll();
         for (AppUser appUser : appUsers) {
 
@@ -79,6 +80,7 @@ public class ShareWalletController {
                 mail.setMailSubject("One For All Team");
                 mail.setMailContent("Ban Da Duoc "+wallet.getAppUser().getUsername()+" chia se vi "+wallet.getName());
                 mailService.sendEmail(mail);
+                shareWallet.setStatus(1);
                 shareWalletService.save(shareWallet);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
