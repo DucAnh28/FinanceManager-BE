@@ -8,7 +8,6 @@ import com.codegym.qltcbe.service.notification.NotificationService;
 import com.codegym.qltcbe.service.shareWallet.IShareWalletService;
 import com.codegym.qltcbe.service.user.UserService;
 import com.codegym.qltcbe.service.wallet.WalletService;
-import jdk.javadoc.internal.doclets.toolkit.taglets.SeeTaglet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,20 +77,5 @@ public class ShareWalletController {
         return null;
     }
 
-//    @PostMapping("/create/{walletId}")
-//    public ResponseEntity<ShareWallet> createShareWallet(@PathVariable Long walletId, @RequestBody AppUser appUser) {
-//        Wallet wallet = walletService.findById(walletId).get();
-//        if (wallet.getAppUser().getId() == appUser.getId()) {
-//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//        ShareWallet shareWallet = new ShareWallet(appUser, wallet);
-//        List<ShareWallet> shareWallets = (List<ShareWallet>) shareWalletService.findAll();
-//        for (ShareWallet shareWallet1 : shareWallets) {
-//            if (shareWallet1.getWallet().getId() == shareWallet.getWallet().getId() && shareWallet1.getAppUser().getId() == shareWallet.getAppUser().getId()) {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            }
-//        }
-//        return null;
-//    }
 }
 
