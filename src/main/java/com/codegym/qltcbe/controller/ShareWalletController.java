@@ -78,7 +78,7 @@ public class ShareWalletController {
                 mail.setMailFrom("oneforallgroup@Yolo.com");
                 mail.setMailTo(user1.getEmail());
                 mail.setMailSubject("One For All Team");
-                mail.setMailContent("Ban Da Duoc "+wallet.getAppUser().getUsername()+" chia se vi "+wallet.getName());
+                mail.setMailContent("Ban da duoc "+wallet.getAppUser().getUsername()+" chia se vi "+wallet.getName());
                 mailService.sendEmail(mail);
                 shareWallet.setStatus(1);
                 shareWalletService.save(shareWallet);
