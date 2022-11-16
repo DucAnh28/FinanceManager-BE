@@ -1,9 +1,11 @@
 package com.codegym.qltcbe.controller;
 
+import com.codegym.qltcbe.model.dto.Mail;
 import com.codegym.qltcbe.model.entity.AppUser;
 import com.codegym.qltcbe.model.entity.Notification;
 import com.codegym.qltcbe.model.entity.ShareWallet;
 import com.codegym.qltcbe.model.entity.Wallet;
+import com.codegym.qltcbe.service.mail.IMailService;
 import com.codegym.qltcbe.service.notification.NotificationService;
 import com.codegym.qltcbe.service.shareWallet.IShareWalletService;
 import com.codegym.qltcbe.service.user.UserService;
@@ -28,6 +30,8 @@ public class ShareWalletController {
     private WalletService walletService;
     @Autowired
     private NotificationService notificationService;
+    @Autowired
+    private IMailService mailService;
 
     @GetMapping("/list/{userId}")
     public ResponseEntity<List<Wallet>> findALlSharedWallet(@PathVariable Long userId) {
@@ -69,6 +73,12 @@ public class ShareWalletController {
                         user1
                 );
                 notificationService.save(n);
+                Mail mail = new Mail();
+                mail.setMailFrom("oneforallgroup@Yolo.com");
+                mail.setMailTo(user1.getEmail());
+                mail.setMailSubject("One For All Team");
+                mail.setMailContent("Ban Da Duoc "+wallet.getAppUser().getUsername()+" chia se vi "+wallet.getName());
+                mailService.sendEmail(mail);
                 shareWalletService.save(shareWallet);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
