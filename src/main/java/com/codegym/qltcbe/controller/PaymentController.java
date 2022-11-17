@@ -124,9 +124,9 @@ public class PaymentController {
     }
 
     @GetMapping("find-All-Transactions-during-time-by-wallet")
-    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long id) {
-        Long walletId = Long.valueOf(id);
-        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, walletId);
+    public ResponseEntity<Iterable<Payment>> findAllTransactionsDuringTime(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("wallet_id") Long wallet_id) {
+//        Long walletId = Long.valueOf(id);
+        Iterable<Payment> payments = paymentService.findAllTransactionsDuringTimeByWallet(startDate, endDate, wallet_id);
         return new ResponseEntity<>(payments, HttpStatus.OK);
     }
 
