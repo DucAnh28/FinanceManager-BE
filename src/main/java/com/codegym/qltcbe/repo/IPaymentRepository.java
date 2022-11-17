@@ -47,7 +47,6 @@ public interface IPaymentRepository extends JpaRepository<Payment, Long> {
 
     @Query(nativeQuery = true, value = "select sum(p.money) as total\n" +
             "from payment p\n" +
-            "    join wallet w on w.id = p.wallet_id = w.id\n" +
             "    join users u on p.user_id = u.id\n" +
             "where p.date = curdate() and u.id = ?")
     Iterable<SumInDay> getSumInDay(Long id);
