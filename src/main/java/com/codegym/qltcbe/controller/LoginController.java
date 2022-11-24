@@ -45,14 +45,14 @@ public class LoginController {
     private ICategoryService categoryService;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginForm user) {
+    public ResponseEntity<JwtResponse> login(@Valid @RequestBody LoginForm loginForm) {
         try {
             // Tạo 1 đối tượng authentication
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             // Tạo token mới
             String token = jwtService.createToken(authentication);
-            AppUser user1 = userService.getUserByUsername(user.getUsername());
+            AppUser user1 = userService.getUserByUsername(loginForm.getUsername());
             JwtResponse jwtResponse = new JwtResponse(user1.getId(), user1.getUsername(), token, user1.getRoles());
             return new ResponseEntity<>(jwtResponse, HttpStatus.ACCEPTED);
         } catch (Exception e) {

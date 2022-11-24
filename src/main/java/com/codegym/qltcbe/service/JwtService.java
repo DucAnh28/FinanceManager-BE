@@ -25,12 +25,13 @@ public class JwtService {
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + EXPIRE_TIME*1000))
-                .signWith(SignatureAlgorithm.HS512,KEY_UNLOCK_TOKEN)
+                .setExpiration(new Date(new Date().getTime() + EXPIRE_TIME * 1000))
+                .signWith(SignatureAlgorithm.HS512, KEY_UNLOCK_TOKEN)
                 .compact();
     }
+
     // Lấy tên user từ token:
-    public String getUsernameFromJwtToken(String token){
+    public String getUsernameFromJwtToken(String token) {
         String username = Jwts.parser()
                 .setSigningKey(KEY_UNLOCK_TOKEN)
                 .parseClaimsJws(token)
