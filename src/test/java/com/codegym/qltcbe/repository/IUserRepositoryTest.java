@@ -34,4 +34,5 @@ public class IUserRepositoryTest {
     public void whenFindAll_thenReturnListNotNull() {
         assertThat(userRepository.findAll()).isNotNull();
     }
+
 }

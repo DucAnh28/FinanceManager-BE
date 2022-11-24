@@ -30,8 +30,7 @@ public class UserServiceTest {
         appUser.setRoles(roleSet);
 
         doReturn(Optional.of(appUser)).when(userRepository).findById(1L);
-        AppUser temp = userRepository.findByUsername("admin");
-        doReturn(temp).when(userRepository).findByUsername("admin");
+        doReturn(appUser).when(userRepository).findByUsername("admin");
         List<AppUser> appUserList = new ArrayList<>();
         appUserList.add(appUser);
         doReturn(appUserList).when(userRepository).findAll();
@@ -42,6 +41,7 @@ public class UserServiceTest {
     public void whenFindAllNotNull() {
         assertThat(userService.findAll()).isNotNull();
     }
+
     @Test
     @DisplayName("findByID can return name admin")
     public void whenFindById_thenReturnUser() {
@@ -50,9 +50,10 @@ public class UserServiceTest {
     }
 
     @Test
-    @DisplayName("findAll can return list is not null")
+    @DisplayName("findByUsername can return user with name admin")
     public void whenFindByUsername_thenReturnUser() {
-        Optional<AppUser> appUser = Optional.ofNullable(userService.getUserByUsername("admin"));
-        assertThat(appUser.get().getUsername()).isEqualTo("admin");
+        String username = "admin";
+        AppUser appUser = userService.getUserByUsername(username);
+        assertThat(appUser.getUsername()).isEqualTo("admin");
     }
 }
