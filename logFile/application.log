@@ -1,0 +1,189 @@
+2022-12-11 21:03:16.461  INFO 500 --- [restartedMain] com.codegym.qltcbe.QltcBeApplication     : Starting QltcBeApplication using Java 17.0.5 on Mit with PID 500 (D:\Practice\FinancialManagement-BE\build\classes\java\main started by yoyo in D:\Practice\FinancialManagement-BE)
+2022-12-11 21:03:16.465  INFO 500 --- [restartedMain] com.codegym.qltcbe.QltcBeApplication     : No active profile set, falling back to 1 default profile: "default"
+2022-12-11 21:03:16.602  INFO 500 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-12-11 21:03:16.603  INFO 500 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-12-11 21:03:19.957  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2022-12-11 21:03:19.962  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2022-12-11 21:03:20.027  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.ICategoryRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.029  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.INotificationRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.032  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.IPaymentRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.035  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.IRoleRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.037  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.IShareWalletRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.041  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.IUserRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.045  INFO 500 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.codegym.qltcbe.repo.WalletRepo; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2022-12-11 21:03:20.046  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 0 JDBC repository interfaces.
+2022-12-11 21:03:20.061  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2022-12-11 21:03:20.064  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-11 21:03:20.161  INFO 500 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 84 ms. Found 7 JPA repository interfaces.
+2022-12-11 21:03:22.453  INFO 500 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-12-11 21:03:22.474  INFO 500 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-11 21:03:22.474  INFO 500 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2022-12-11 21:03:22.650  INFO 500 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-11 21:03:22.650  INFO 500 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6043 ms
+2022-12-11 21:03:23.151  INFO 500 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-11 21:03:23.237  INFO 500 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.12.Final
+2022-12-11 21:03:23.616  INFO 500 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-11 21:03:23.877  INFO 500 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-11 21:03:24.403  INFO 500 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-11 21:03:24.454  INFO 500 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-12-11 21:03:26.121  INFO 500 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-11 21:03:26.138  INFO 500 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-11 21:03:26.780  WARN 500 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-11 21:03:27.863  INFO 500 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint(s) beneath base path '/actuator'
+2022-12-11 21:03:27.876  INFO 500 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@564c9701, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3b2fe0e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@7de3856e, org.springframework.security.web.header.HeaderWriterFilter@1e4a032b, org.springframework.web.filter.CorsFilter@72a89ce6, org.springframework.security.web.authentication.logout.LogoutFilter@2e6f0760, com.codegym.qltcbe.config.filter.JwtAuthenticationFilter@4828dd61, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@49bd52d4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17c1049e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f46935d, org.springframework.security.web.session.SessionManagementFilter@195d425, org.springframework.security.web.access.ExceptionTranslationFilter@4f722259, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@371b2e0f]
+2022-12-11 21:03:28.036  WARN 500 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2022-12-11 21:03:28.617  INFO 500 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-12-11 21:03:28.713  INFO 500 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-12-11 21:03:28.754  INFO 500 --- [restartedMain] com.codegym.qltcbe.QltcBeApplication     : Started QltcBeApplication in 13.576 seconds (JVM running for 16.49)
+2022-12-11 21:03:28.991  INFO 500 --- [RMI TCP Connection(3)-192.168.1.18] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-11 21:03:28.991  INFO 500 --- [RMI TCP Connection(3)-192.168.1.18] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-11 21:03:28.994  INFO 500 --- [RMI TCP Connection(3)-192.168.1.18] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-12-11 21:05:59.166 DEBUG 500 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_5_,
+        appuser0_.address as address2_5_,
+        appuser0_.ava as ava3_5_,
+        appuser0_.email as email4_5_,
+        appuser0_.password as password5_5_,
+        appuser0_.phone as phone6_5_,
+        appuser0_.status as status7_5_,
+        appuser0_.username as username8_5_ 
+    from
+        users appuser0_ 
+    where
+        appuser0_.username=?
+2022-12-11 21:05:59.174 TRACE 500 --- [http-nio-8080-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ducanh]
+2022-12-11 21:05:59.214 DEBUG 500 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        roles0_.app_user_id as app_user1_6_0_,
+        roles0_.roles_id as roles_id2_6_0_,
+        role1_.id as id1_3_1_,
+        role1_.name as name2_3_1_ 
+    from
+        users_roles roles0_ 
+    inner join
+        role role1_ 
+            on roles0_.roles_id=role1_.id 
+    where
+        roles0_.app_user_id=?
+2022-12-11 21:05:59.216 TRACE 500 --- [http-nio-8080-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:05:59.291 DEBUG 500 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_5_,
+        appuser0_.address as address2_5_,
+        appuser0_.ava as ava3_5_,
+        appuser0_.email as email4_5_,
+        appuser0_.password as password5_5_,
+        appuser0_.phone as phone6_5_,
+        appuser0_.status as status7_5_,
+        appuser0_.username as username8_5_ 
+    from
+        users appuser0_ 
+    where
+        appuser0_.username=?
+2022-12-11 21:05:59.292 TRACE 500 --- [http-nio-8080-exec-2] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ducanh]
+2022-12-11 21:06:23.739 DEBUG 500 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_5_,
+        appuser0_.address as address2_5_,
+        appuser0_.ava as ava3_5_,
+        appuser0_.email as email4_5_,
+        appuser0_.password as password5_5_,
+        appuser0_.phone as phone6_5_,
+        appuser0_.status as status7_5_,
+        appuser0_.username as username8_5_ 
+    from
+        users appuser0_ 
+    where
+        appuser0_.username=?
+2022-12-11 21:06:23.749 TRACE 500 --- [http-nio-8080-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ducanh]
+2022-12-11 21:06:23.756 DEBUG 500 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        roles0_.app_user_id as app_user1_6_0_,
+        roles0_.roles_id as roles_id2_6_0_,
+        role1_.id as id1_3_1_,
+        role1_.name as name2_3_1_ 
+    from
+        users_roles roles0_ 
+    inner join
+        role role1_ 
+            on roles0_.roles_id=role1_.id 
+    where
+        roles0_.app_user_id=?
+2022-12-11 21:06:23.757 TRACE 500 --- [http-nio-8080-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:06:23.842 DEBUG 500 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        * 
+    from
+        category c 
+    where
+        c.app_user_id = ? 
+        and status = 1
+2022-12-11 21:06:23.843 TRACE 500 --- [http-nio-8080-exec-3] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:06:48.874 DEBUG 500 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_5_,
+        appuser0_.address as address2_5_,
+        appuser0_.ava as ava3_5_,
+        appuser0_.email as email4_5_,
+        appuser0_.password as password5_5_,
+        appuser0_.phone as phone6_5_,
+        appuser0_.status as status7_5_,
+        appuser0_.username as username8_5_ 
+    from
+        users appuser0_ 
+    where
+        appuser0_.username=?
+2022-12-11 21:06:48.883 TRACE 500 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [VARCHAR] - [ducanh]
+2022-12-11 21:06:48.893 DEBUG 500 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        roles0_.app_user_id as app_user1_6_0_,
+        roles0_.roles_id as roles_id2_6_0_,
+        role1_.id as id1_3_1_,
+        role1_.name as name2_3_1_ 
+    from
+        users_roles roles0_ 
+    inner join
+        role role1_ 
+            on roles0_.roles_id=role1_.id 
+    where
+        roles0_.app_user_id=?
+2022-12-11 21:06:48.894 TRACE 500 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:06:48.903 DEBUG 500 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        * 
+    from
+        category c 
+    where
+        c.app_user_id = ? 
+        and status = 1
+2022-12-11 21:06:48.904 TRACE 500 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:06:48.908 DEBUG 500 --- [http-nio-8080-exec-4] org.hibernate.SQL                        : 
+    select
+        appuser0_.id as id1_5_0_,
+        appuser0_.address as address2_5_0_,
+        appuser0_.ava as ava3_5_0_,
+        appuser0_.email as email4_5_0_,
+        appuser0_.password as password5_5_0_,
+        appuser0_.phone as phone6_5_0_,
+        appuser0_.status as status7_5_0_,
+        appuser0_.username as username8_5_0_,
+        roles1_.app_user_id as app_user1_6_1_,
+        role2_.id as roles_id2_6_1_,
+        role2_.id as id1_3_2_,
+        role2_.name as name2_3_2_ 
+    from
+        users appuser0_ 
+    left outer join
+        users_roles roles1_ 
+            on appuser0_.id=roles1_.app_user_id 
+    left outer join
+        role role2_ 
+            on roles1_.roles_id=role2_.id 
+    where
+        appuser0_.id=?
+2022-12-11 21:06:48.909 TRACE 500 --- [http-nio-8080-exec-4] o.h.type.descriptor.sql.BasicBinder      : binding parameter [1] as [BIGINT] - [1]
+2022-12-11 21:06:48.915  INFO 500 --- [http-nio-8080-exec-4] c.codegym.qltcbe.log.AuditTrailListener  : [USER AUDIT] category loaded from database: 1
+2022-12-11 21:20:01.309  INFO 500 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-12-11 21:20:01.315  INFO 500 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-12-11 21:20:01.351  INFO 500 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
